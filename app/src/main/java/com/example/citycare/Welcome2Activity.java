@@ -47,29 +47,24 @@ public class Welcome2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent s = new Intent(getApplicationContext(), SignupSigninActivity.class);
-                s.putExtra("fragment","signUp");
+                Intent s = new Intent(Welcome2Activity.this, SignupSigninActivity.class);
+                s.putExtra("fragment_index_key",1);
                 startActivity(s);
                 finish();
-
 
             }
         });
 
-
-
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent s = new Intent(getApplicationContext(), SignupSigninActivity.class);
+                Intent s = new Intent(Welcome2Activity.this, SignupSigninActivity.class);
                 startActivity(s);
                 finish();
             }});
 
 
     }
-
-
 
 
 }

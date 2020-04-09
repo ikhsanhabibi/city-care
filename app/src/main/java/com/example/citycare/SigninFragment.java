@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,27 +41,12 @@ public class SigninFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         // Firebase
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) view.findViewById(R.id.email);
         editTextPassword = (EditText) view.findViewById(R.id.password);
         continue_btn = (Button) view.findViewById(R.id.continue_btn);
-
-
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-                if (mFirebaseUser != null) {
-                    Toast.makeText(getContext(), "You are logged in.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), NavigationActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getContext(), "Please log in.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +56,10 @@ public class SigninFragment extends Fragment {
                 if (email.isEmpty()) {
                     editTextEmail.setError("Please enter your email!");
                     editTextEmail.requestFocus();
-                }
-                else if (pwd.isEmpty()) {
+                } else if (pwd.isEmpty()) {
                     editTextPassword.setError("Please enter your password!");
                     editTextPassword.requestFocus();
-                }
-                else if (email.isEmpty() && pwd.isEmpty()) {
+                } else if (email.isEmpty() && pwd.isEmpty()) {
                     Toast.makeText(getContext(), "Fields Are Empty!", Toast.LENGTH_SHORT).show();
                 } else if (!(email.isEmpty() && pwd.isEmpty())) {
                     mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -101,11 +85,8 @@ public class SigninFragment extends Fragment {
         return view;
     }
 
-    //Check valid email pattern
-    public static boolean isEmailValid(String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
+
+
 }
+
+

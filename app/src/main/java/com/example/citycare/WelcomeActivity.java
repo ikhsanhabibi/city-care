@@ -24,7 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // One time activity
         SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         if(pref.getBoolean("activity_executed", false)){
-            Intent intent = new Intent(this, SignupSigninActivity.class);
+            Intent intent = new Intent(this, Welcome2Activity.class);
             startActivity(intent);
             finish();
         } else {
@@ -52,7 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
         get_started.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent s = new Intent(getApplicationContext(), SignupSigninActivity.class);
+                Intent s = new Intent(getApplicationContext(), Welcome2Activity.class);
                 startActivity(s);
                 finish();
             }
