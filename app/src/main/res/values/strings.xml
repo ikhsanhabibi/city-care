@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">City Care</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="ccs">Citizens complaint service</string>
+    <string name="get_started">Get started</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="report_it">Report it, we will handle it!</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="continue_btn">Continue</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="or">or</string>
+    <string name="google_btn">Login with google</string>
+    <string name="fb_btn">Login with facebook</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="send">Send</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="my_complaints">My Complaints</string>
+    <string name="complaints_sent">Complaint is sent!</string>
+    <string name="complaints_success">Your complaint was sent successfully. For more details, check All My Reports page under Profile tab</string>
+    <string name="my_suggestions">My Suggestions</string>
+    <string name="suggestions_sent">Suggestion is sent!</string>
+    <string name="suggestions_success">Your suggestion was sent successfully. For more details, check All My Reports page under Profile tab</string>
+
+
+</resources>

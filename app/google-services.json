@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "638363850483",
+    "firebase_url": "https://city-care-2fc11.firebaseio.com",
+    "project_id": "city-care-2fc11",
+    "storage_bucket": "city-care-2fc11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638363850483:android:1aa32a95bb1fd353da0986",
+        "android_client_info": {
+          "package_name": "com.example.citycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638363850483-lqqb0ivueuhnmlb0k50hn6ds15v2lnun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhztBOEgEUqQeK4O0KwWzuwigMTamuKNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638363850483-lqqb0ivueuhnmlb0k50hn6ds15v2lnun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638363850483:android:4ed811b980b421ffda0986",
+        "android_client_info": {
+          "package_name": "com.htwberlin.citycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638363850483-lqqb0ivueuhnmlb0k50hn6ds15v2lnun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhztBOEgEUqQeK4O0KwWzuwigMTamuKNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638363850483-lqqb0ivueuhnmlb0k50hn6ds15v2lnun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
