@@ -8,7 +8,6 @@
     android:background="@color/lightGrey"
     >
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -52,8 +51,48 @@
         android:orientation="vertical">
 
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_add_a_photo_black_24dp"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="25dp"
+                android:id="@+id/add_image"
+
+                />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_add_location_black_24dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginRight="25dp"
+                android:id="@+id/add_location"
+
+                />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="175dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="27dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/form_category_selector"
+                android:popupBackground="#ffffff"
+                android:textColor="@color/grey"
+                />
+
+        </RelativeLayout>
+
+
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-30dp"
@@ -67,7 +106,7 @@
 
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:autofillHints="description"
@@ -92,6 +131,8 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

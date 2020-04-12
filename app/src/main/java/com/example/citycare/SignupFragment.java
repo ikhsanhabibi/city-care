@@ -38,7 +38,7 @@ public class SignupFragment extends Fragment {
     private Button continue_btn;
 
     private FirebaseAuth mAuth;
-    FirebaseFirestore firestore;
+    private FirebaseFirestore firestore;
 
     public SignupFragment() {
 
@@ -62,10 +62,9 @@ public class SignupFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-               final String name = editTextName.getText().toString();
-               final String email = editTextEmail.getText().toString();
-               final String password = editTextPassword.getText().toString();
-
+                 final String name = editTextName.getText().toString();
+                 final String email = editTextEmail.getText().toString();
+                 final String password = editTextPassword.getText().toString();
 
                 if (name.isEmpty()) {
                     editTextName.setError("Name is required");
@@ -127,7 +126,7 @@ public class SignupFragment extends Fragment {
     }
 
     // create account with email and password
-    public void createAccount(final String email, String password, final String name) {
+    public void createAccount(final String email, final String password, final String name) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
