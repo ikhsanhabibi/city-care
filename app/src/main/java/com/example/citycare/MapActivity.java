@@ -68,7 +68,6 @@ public class MapActivity extends AppCompatActivity {
         // Map Controller
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setMultiTouchControls(true);
 
         mapController = map.getController();
         mapController.setZoom(18.5);
@@ -79,6 +78,7 @@ public class MapActivity extends AppCompatActivity {
         map.setHorizontalMapRepetitionEnabled(false);
         map.setVerticalMapRepetitionEnabled(false);
         map.setScrollableAreaLimitLatitude(MapView.getTileSystem().getMaxLatitude(), MapView.getTileSystem().getMinLatitude(), 0);
+        map.setMultiTouchControls(true);
 
         // final GeoPoint startPoint = new GeoPoint(-6.1918644, 106.8229880);
         // mapController.setCenter(startPoint);
@@ -87,8 +87,8 @@ public class MapActivity extends AppCompatActivity {
         provider = new GpsMyLocationProvider(ctx);
         provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
         myLocationNewOverlay = new MyLocationNewOverlay(provider, map);
-        myLocationNewOverlay.enableFollowLocation();
         myLocationNewOverlay.enableMyLocation();
+        myLocationNewOverlay.enableFollowLocation();
 
         Bitmap bitmapNotMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
         Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
@@ -103,11 +103,11 @@ public class MapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 map.getOverlays().clear();
 
+                GeoPoint myPosition = new GeoPoint(provider.getLastKnownLocation().getLatitude(), provider.getLastKnownLocation().getLongitude());
+                map.getController().animateTo(myPosition);
+
                 map.getOverlays().add(myLocationNewOverlay);
                 map.getOverlays().add(touchOverlay);
-
-                myLocationNewOverlay.enableFollowLocation();
-
             }
         });
 
