@@ -23,7 +23,9 @@ import android.widget.ImageButton;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.Projection;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
@@ -40,22 +42,20 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
-    MapView map = null;
-    Context ctx;
+    private MapView map = null;
+    private Context ctx;
     private MyLocationNewOverlay myLocationNewOverlay;
     private ImageButton btCenterMap;
-    private Location currentLocation = null;
-    IMapController mapController;
-    GpsMyLocationProvider provider;
-    Overlay touchOverlay;
+    private IMapController mapController;
+    private GpsMyLocationProvider provider;
+    private Overlay touchOverlay;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(MapActivity.this,NavigationActivity.class);
+        Intent intent = new Intent(MapActivity.this, NavigationActivity.class);
         startActivity(intent);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,38 +65,23 @@ public class MapActivity extends AppCompatActivity {
 
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+        // Map Controller
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
 
         mapController = map.getController();
-        mapController.setZoom(9.5);
+        mapController.setZoom(18.5);
+        map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+        map.setScrollableAreaLimitDouble(new BoundingBox(85, 180, -85, -180));
+        map.setMaxZoomLevel(20.0);
+        map.setMinZoomLevel(4.0);
+        map.setHorizontalMapRepetitionEnabled(false);
+        map.setVerticalMapRepetitionEnabled(false);
+        map.setScrollableAreaLimitLatitude(MapView.getTileSystem().getMaxLatitude(), MapView.getTileSystem().getMinLatitude(), 0);
+
         // final GeoPoint startPoint = new GeoPoint(-6.1918644, 106.8229880);
         // mapController.setCenter(startPoint);
-
-
-        btCenterMap = findViewById(R.id.ic_center_map);
-        btCenterMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                map.getOverlays().clear();
-
-                provider = new GpsMyLocationProvider(ctx);
-                provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
-
-                myLocationNewOverlay = new MyLocationNewOverlay(provider, map);
-                myLocationNewOverlay.enableFollowLocation();
-                myLocationNewOverlay.enableMyLocation();
-
-                Bitmap bitmapNotMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
-                Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
-                myLocationNewOverlay.setDirectionArrow(bitmapNotMoving, bitmapMoving);
-
-                map.getOverlays().add(myLocationNewOverlay);
-                map.getOverlays().add(touchOverlay);
-            }
-        });
-
 
         // Set default GPS Location
         provider = new GpsMyLocationProvider(ctx);
@@ -106,10 +91,25 @@ public class MapActivity extends AppCompatActivity {
         myLocationNewOverlay.enableMyLocation();
 
         Bitmap bitmapNotMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
-        final Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(),R.drawable.map_red);
+        Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
         myLocationNewOverlay.setDirectionArrow(bitmapNotMoving, bitmapMoving);
 
         map.getOverlays().add(myLocationNewOverlay);
+
+        // Click default location
+        btCenterMap = (ImageButton) findViewById(R.id.ic_center_map);
+        btCenterMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.getOverlays().clear();
+
+                map.getOverlays().add(myLocationNewOverlay);
+                map.getOverlays().add(touchOverlay);
+
+                myLocationNewOverlay.enableFollowLocation();
+
+            }
+        });
 
 
         // Overlay map icon
@@ -120,7 +120,6 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public void draw(Canvas arg0, MapView arg1, boolean arg2) {
-
             }
 
             @Override
@@ -129,9 +128,16 @@ public class MapActivity extends AppCompatActivity {
 
                 startMarker.setIcon(icon);
                 startMarker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
-                            (float) pMapView.getMapCenter().getLongitude()));
+                        (float) pMapView.getMapCenter().getLongitude()));
 
                 startMarker.setTitle(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
+
+                startMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker, MapView mapView) {
+                        return false;
+                    }
+                });
 
                 return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
             }
@@ -144,8 +150,8 @@ public class MapActivity extends AppCompatActivity {
                 Projection proj = map.getProjection();
                 GeoPoint loc = (GeoPoint) proj.fromPixels((int) e.getX(), (int) e.getY());
                 String longitude = Double.toString((double) loc.getLongitude());
-                String latitude = Double.toString((double) loc.getLatitude() );
-                System.out.println("- Latitude = " + latitude + ", Longitude = " + longitude);
+                String latitude = Double.toString((double) loc.getLatitude());
+                //System.out.println("- Latitude = " + latitude + ", Longitude = " + longitude);
 
                 ArrayList<OverlayItem> overlayArray = new ArrayList<OverlayItem>();
                 OverlayItem mapItem = new OverlayItem("", "", new GeoPoint(((double) loc.getLatitude()), ((double) loc.getLongitude())));
@@ -156,6 +162,12 @@ public class MapActivity extends AppCompatActivity {
                 startMarker.setPosition(loc);
                 startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
+                startMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker, MapView mapView) {
+                        return false;
+                    }
+                });
 
                 map.getOverlays().add(startMarker);
                 overlayArray.add(mapItem);
@@ -172,27 +184,23 @@ public class MapActivity extends AppCompatActivity {
                     mapView.getOverlays().add(anotherItemizedIconOverlay);
                 }
 
-
                 return true;
             }
 
         };
 
-
         map.getOverlays().add(touchOverlay);
     }
 
-
     public void onResume() {
         super.onResume();
-        map.onResume(); //needed for compass, my location overlays, v6.0.0 and up
+        map.onResume();
     }
 
     public void onPause() {
         super.onPause();
-        map.onPause();  //needed for compass, my location overlays, v6.0.0 and up
+        map.onPause();
     }
-
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
@@ -207,7 +215,7 @@ public class MapActivity extends AppCompatActivity {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
-                Log.w(TAG, strReturnedAddress.toString());
+                // Log.w(TAG, strReturnedAddress.toString());
             } else {
                 Log.w(TAG, "No Address returned!");
             }
@@ -217,6 +225,5 @@ public class MapActivity extends AppCompatActivity {
         }
         return strAdd;
     }
-
 
 }
