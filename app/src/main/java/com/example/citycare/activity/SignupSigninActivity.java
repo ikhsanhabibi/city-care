@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -7,15 +7,19 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.citycare.R;
+import com.example.citycare.ViewPagerAdapter;
+import com.example.citycare.fragment.SigninFragment;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupSigninActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TabItem signIn, signUp;
-    ViewPagerAdapter adapter;
+    private ViewPagerAdapter adapter;
 
     @Override
     public void onBackPressed() {
@@ -49,14 +53,12 @@ public class SignupSigninActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-
 
         });
 

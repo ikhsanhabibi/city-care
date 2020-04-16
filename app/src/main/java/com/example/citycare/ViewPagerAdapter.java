@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.citycare.fragment.SigninFragment;
+import com.example.citycare.fragment.SignupFragment;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private int tabsNumber;
 

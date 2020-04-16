@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.citycare.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

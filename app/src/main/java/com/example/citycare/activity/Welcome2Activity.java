@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.citycare.R;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Welcome2Activity extends AppCompatActivity {
 
     TextView welcometo;
@@ -16,10 +19,19 @@ public class Welcome2Activity extends AppCompatActivity {
     TextView report_it;
     Button sign_up;
     Button sign_in;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(Welcome2Activity.this, NavigationActivity.class));
+            finish();
+        }
+
         setContentView(R.layout.activity_welcome_2);
         // Change font
         Typeface bold = Typeface.createFromAsset(getAssets(), "fonts/NeusaNextStd-Bold.ttf");
@@ -48,7 +60,7 @@ public class Welcome2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent s = new Intent(Welcome2Activity.this, SignupSigninActivity.class);
-                s.putExtra("fragment_index_key",1);
+                s.putExtra("fragment_index_key", 1);
                 startActivity(s);
                 finish();
 
@@ -61,7 +73,8 @@ public class Welcome2Activity extends AppCompatActivity {
                 Intent s = new Intent(Welcome2Activity.this, SignupSigninActivity.class);
                 startActivity(s);
                 finish();
-            }});
+            }
+        });
 
 
     }

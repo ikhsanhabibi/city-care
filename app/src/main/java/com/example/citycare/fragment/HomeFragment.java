@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.citycare.R;
+import com.example.citycare.activity.ComplaintFormActivity;
+import com.example.citycare.activity.SignupSigninActivity;
+import com.example.citycare.activity.SuggestionFormActivity;
+import com.example.citycare.activity.Welcome2Activity;
 
 
 /**
@@ -35,6 +40,7 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getContext(), ComplaintFormActivity.class);
                 startActivity(intent);
             }
+
         });
 
         ImageView suggestion = view.findViewById(R.id.suggestion);

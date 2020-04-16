@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.citycare.R;
+import com.example.citycare.activity.SignupSigninActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +46,14 @@ public class SignupFragment extends Fragment {
 
     }
 
+    //Checking valid email pattern
+    public static boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,18 +63,18 @@ public class SignupFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        editTextName = (EditText) view.findViewById(R.id.name);
-        editTextEmail = (EditText) view.findViewById(R.id.email);
-        editTextPassword = (EditText) view.findViewById(R.id.password);
-        continue_btn = (Button) view.findViewById(R.id.continue_btn);
+        editTextName = view.findViewById(R.id.name);
+        editTextEmail = view.findViewById(R.id.email);
+        editTextPassword = view.findViewById(R.id.password);
+        continue_btn = view.findViewById(R.id.continue_btn);
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                 final String name = editTextName.getText().toString();
-                 final String email = editTextEmail.getText().toString();
-                 final String password = editTextPassword.getText().toString();
+                final String name = editTextName.getText().toString();
+                final String email = editTextEmail.getText().toString();
+                final String password = editTextPassword.getText().toString();
 
                 if (name.isEmpty()) {
                     editTextName.setError("Name is required");
@@ -117,14 +127,6 @@ public class SignupFragment extends Fragment {
         return view;
     }
 
-    //Checking valid email pattern
-    public static boolean isEmailValid(String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
     // create account with email and password
     public void createAccount(final String email, final String password, final String name) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -153,7 +155,6 @@ public class SignupFragment extends Fragment {
                             Log.w(TAG, "Error! User document not saved!", e);
                         }
                     });
-                    ;
 
                 } else {
                     startActivity(new Intent(getActivity(), SignupSigninActivity.class));

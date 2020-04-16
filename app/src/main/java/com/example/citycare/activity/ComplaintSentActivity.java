@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+
+import com.example.citycare.R;
 
 public class ComplaintSentActivity extends AppCompatActivity {
 
@@ -22,8 +23,7 @@ public class ComplaintSentActivity extends AppCompatActivity {
         my_complaints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
-                s.putExtra("fragment", "signUp");
+                Intent s = new Intent(getApplicationContext(), ReportsActivity.class);
                 startActivity(s);
                 finish();
             }

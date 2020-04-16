@@ -1,8 +1,10 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.citycare.R;
 
 public class SuggestionSentActivity extends AppCompatActivity {
 

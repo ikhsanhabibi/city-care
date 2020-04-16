@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.citycare.R;
 
 public class SuggestionFormActivity extends AppCompatActivity {
 
@@ -21,7 +23,6 @@ public class SuggestionFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
-                s.putExtra("fragment","signUp");
                 startActivity(s);
                 finish();
 

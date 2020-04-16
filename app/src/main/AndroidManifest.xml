@@ -15,15 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".ReportsActivity" />
-        <activity android:name=".NavigationActivity" />
-        <activity android:name=".SuggestionSentActivity" />
-        <activity android:name=".ComplaintSentActivity" />
-        <activity android:name=".SuggestionFormActivity" />
-        <activity android:name=".ComplaintFormActivity" />
-        <activity android:name=".Welcome2Activity" />
-        <activity android:name=".SignupSigninActivity" />
+        <activity android:name=".activity.MapActivity"></activity>
+        <activity android:name=".activity.ReportsActivity" />
+        <activity android:name=".activity.NavigationActivity" />
+        <activity android:name=".activity.SuggestionSentActivity" />
+        <activity android:name=".activity.ComplaintSentActivity" />
+        <activity android:name=".activity.SuggestionFormActivity" />
+        <activity android:name=".activity.ComplaintFormActivity" />
+        <activity android:name=".activity.Welcome2Activity" />
+        <activity android:name=".activity.SignupSigninActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".activity.WelcomeActivity" />
     </application>
 
 </manifest>

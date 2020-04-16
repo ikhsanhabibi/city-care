@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.citycare.fragment.HelpFragment;
+import com.example.citycare.fragment.HomeFragment;
+import com.example.citycare.fragment.NotificationsFragment;
+import com.example.citycare.fragment.ProfileFragment;
+import com.example.citycare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

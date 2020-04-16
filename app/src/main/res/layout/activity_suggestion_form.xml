@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuggestionFormActivity"
     android:background="@color/lightGrey"
-    >
+    tools:context=".activity.SuggestionFormActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -29,13 +28,12 @@
         android:src="@drawable/ic_chevron_left_black_24dp" />
 
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:adjustViewBounds="true"
-            android:scaleX="3"
-            android:scaleY="3"
-            android:src="@drawable/home_logo"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:src="@drawable/home_logo" />
 
 
     <LinearLayout
@@ -47,8 +45,8 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="50dp"
-        android:paddingTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="50dp">
 
 
         <EditText
@@ -71,11 +69,10 @@
             android:layout_height="200dp"
             android:autofillHints="description"
             android:background="@drawable/form_desc"
+            android:gravity="top"
             android:hint="@string/description"
             android:inputType="textMultiLine"
-            android:padding="50dp"
-            android:gravity="top"
-            />
+            android:padding="50dp" />
 
 
         <Button
@@ -91,7 +88,6 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

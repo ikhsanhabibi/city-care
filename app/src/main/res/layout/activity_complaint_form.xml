@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComplaintFormActivity"
     android:background="@color/lightGrey"
-    >
+    tools:context=".activity.ComplaintFormActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -29,13 +28,12 @@
         android:src="@drawable/ic_chevron_left_black_24dp" />
 
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:adjustViewBounds="true"
-            android:scaleX="3"
-            android:scaleY="3"
-            android:src="@drawable/home_logo"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:src="@drawable/home_logo" />
 
 
     <LinearLayout
@@ -47,62 +45,30 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="50dp"
-        android:paddingTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="50dp">
 
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add_a_photo_black_24dp"
-                android:layout_marginLeft="27dp"
-                android:layout_marginRight="25dp"
-                android:id="@+id/add_image"
-
-                />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add_location_black_24dp"
-                android:layout_marginLeft="85dp"
-                android:layout_marginRight="25dp"
-                android:id="@+id/add_location"
-
-                />
+            android:layout_height="wrap_content">
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="175dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="27dp"
                 android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:background="@drawable/form_category_selector"
                 android:popupBackground="#ffffff"
                 android:textColor="@color/grey"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="10dp"
                 />
 
         </RelativeLayout>
-
-
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-30dp"
-            android:autofillHints="title"
-            android:background="@drawable/login_bg_white"
-            android:hint="@string/title"
-            android:inputType="text"
-            android:paddingLeft="50dp"
-            android:paddingRight="40dp"
-            android:paddingBottom="12dp" />
 
 
         <EditText
@@ -110,11 +76,50 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:autofillHints="description"
-            android:background="@drawable/form_desc"
+            android:background="@drawable/form_round_btn"
+            android:gravity="top"
             android:hint="@string/description"
             android:inputType="textMultiLine"
-            android:padding="50dp"
-            android:gravity="top"
+            android:padding="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="20dp"
+            />
+
+
+        <TextView
+            android:id="@+id/uploadPictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/form_round_btn"
+            android:drawableLeft="@drawable/ic_add_a_photo_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left"
+            android:paddingLeft="50dp"
+            android:paddingBottom="10dp"
+            android:text="Upload pictures"
+            android:textSize="17dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp"
+            />
+
+        <TextView
+            android:id="@+id/selectLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_round_btn"
+            android:drawableLeft="@drawable/ic_add_location_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left"
+            android:text="@string/select_location"
+            android:textSize="17dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp"
             />
 
 
@@ -131,8 +136,6 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

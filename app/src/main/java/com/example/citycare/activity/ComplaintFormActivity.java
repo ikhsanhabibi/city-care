@@ -1,9 +1,10 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.citycare.R;
+import com.example.citycare.model.Complaint;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,14 +32,19 @@ import java.util.List;
 
 public class ComplaintFormActivity extends AppCompatActivity {
 
-    private ImageView left_btn, add_location;
-    private Spinner spinner;
     public static final String TAG = "TAG";
-    private Button continue_btn;
-    private EditText editTextTitle, editTextDescription;
+    TextView select_location, select_picture;
     View view;
+    String savedAddress;
+    private ImageView left_btn;
+    private Spinner spinner;
+    private Button continue_btn;
+    private EditText editTextDescription;
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +57,23 @@ public class ComplaintFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
-                s.putExtra("fragment", "signUp");
                 startActivity(s);
                 finish();
-
 
             }
         });
 
-        add_location = findViewById(R.id.add_location);
-        add_location.setOnClickListener(new View.OnClickListener() {
+        select_location = findViewById(R.id.selectLocation);
+        select_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent s = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(s);
                 finish();
-
-
             }
         });
 
-
-        editTextTitle = (EditText) findViewById(R.id.title);
-        editTextDescription = (EditText) findViewById(R.id.description);
+        editTextDescription = findViewById(R.id.description);
 
 
         // Spinner
@@ -101,7 +103,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
                 } else {
                     String item = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -111,27 +113,59 @@ public class ComplaintFormActivity extends AppCompatActivity {
             }
         });
 
+        // Saved Preferences
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String category = sharedPreferences.getString("category", "0");
+        String desc = sharedPreferences.getString("desc", "");
+        String location = sharedPreferences.getString("location", getString(R.string.select_location));
+
+        String savedAddress = getIntent().getStringExtra("address");
+
+        if (savedAddress != null) {
+            select_location.setText(savedAddress.trim());
+        } else if (!location.equals("")) {
+            select_location.setText(location);
+        } else {
+            select_location.setText(getString(R.string.select_location));
+        }
+
+        spinner.setSelection(Integer.parseInt(category));
+        editTextDescription.setText(desc);
+
 
         // setOnClickListener
         continue_btn = findViewById(R.id.continue_btn);
         continue_btn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                String stringTitle = editTextTitle.getText().toString();
                 String stringDescription = editTextDescription.getText().toString();
                 String stringEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 String stringCategory = spinner.getSelectedItem().toString();
+                String stringLocation = select_location.getText().toString();
 
-                createComplaint(stringTitle, stringDescription, stringEmail, stringCategory);
+                if (stringCategory == "Choose category" || stringCategory.isEmpty()) {
+                    spinner.requestFocus();
+                    Toast.makeText(ComplaintFormActivity.this, "Choose category please!.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (stringCategory == "" || stringDescription.isEmpty()) {
+                    editTextDescription.requestFocus();
+                    Toast.makeText(ComplaintFormActivity.this, "Write something please!.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (stringLocation.equals("Select location")) {
+                    select_location.requestFocus();
+                    Toast.makeText(ComplaintFormActivity.this, "Choose a location please!.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    createComplaint(stringDescription, stringEmail, stringCategory, stringLocation);
+                }
+
 
             }
         });
 
-
     }
 
-    public void createComplaint(final String title, final String description, String email, String category) {
+    public void createComplaint(String description, String email, final String category, String location) {
 
         Complaint complaint;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -142,17 +176,17 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
         complaint = new Complaint();
         complaint.setStatus("SENT");
-        complaint.setTitle(title);
         complaint.setDescription(description);
         complaint.setEmail(db.collection("users").document(email).getId());
         complaint.setCategory(category);
-        //complaint.setName(name);
+        complaint.setLocation(location);
 
         newComplaintRef.set(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d(TAG, "Complaint sent.");
                 startActivity(new Intent(getApplicationContext(), ComplaintSentActivity.class));
+                clearForm();
+                Log.d(TAG, "Complaint sent.");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -163,6 +197,31 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SavePreferences("desc", editTextDescription.getText().toString());
+        SavePreferences("location", select_location.getText().toString());
+        SavePreferences("category", String.valueOf(spinner.getSelectedItemPosition()));
+    }
+
+    private void SavePreferences(String key, String value) {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public void clearForm() {
+        select_location.setText("");
+        editTextDescription.setText("");
+        spinner.setSelection(0);
+    }
 
 
 }

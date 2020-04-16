@@ -2,29 +2,73 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parent_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
+        tilesource="Mapnik"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tilesource="Mapnik" />
+        android:layout_height="match_parent" />
 
     <ImageButton
+        android:id="@+id/ic_center_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ic_center_map"
-        android:src="@drawable/ic_gps_fixed_black_24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="230dp"
         android:background="@drawable/map_round_btn"
         android:contentDescription="gps"
+        android:cropToPadding="true"
         android:padding="10dp"
-        android:cropToPadding="true" />
+        android:src="@drawable/ic_gps_fixed_black_24dp" />
 
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Select location"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_place_black_24dp"
+            android:padding="15dp"
+            android:text="Finding location..."
+            android:gravity="center|left"
+            android:drawablePadding="10dp"
+            />
+
+        <Button
+            android:id="@+id/setLocation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/green_button"
+            android:text="Set location"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

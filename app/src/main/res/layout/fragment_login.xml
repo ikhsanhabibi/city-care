@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SigninFragment"
     android:background="@color/lightGrey"
-    >
+    tools:context=".fragment.SigninFragment">
 
 
     <LinearLayout
@@ -32,8 +31,7 @@
             android:inputType="textEmailAddress"
             android:paddingLeft="50dp"
             android:paddingRight="40dp"
-            android:paddingBottom="12dp"
-            />
+            android:paddingBottom="12dp" />
 
         <EditText
             android:id="@+id/password"
@@ -66,8 +64,7 @@
             android:text="@string/forgot_password"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="#78849E"
-            />
+            android:textColor="#78849E" />
 
         <TextView
             android:layout_width="match_parent"
@@ -76,8 +73,7 @@
             android:text="@string/or"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="#78849E"
-            />
+            android:textColor="#78849E" />
 
         <Button
             android:id="@+id/google_btn"

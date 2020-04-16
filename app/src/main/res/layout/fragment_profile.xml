@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGrey"
-    tools:context=".ProfileFragment">
+    tools:context=".fragment.ProfileFragment">
 
 
     <LinearLayout
@@ -28,8 +28,8 @@
         <LinearLayout
             android:layout_width="223dp"
             android:layout_height="100dp"
-            android:gravity="right"
             android:layout_marginRight="100dp"
+            android:gravity="right"
             android:orientation="vertical">
 
             <TextView
@@ -75,7 +75,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="386dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="251dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="94dp"
+
         android:orientation="vertical">
 
 
@@ -93,6 +93,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/reports"
                 android:layout_width="400dp"
                 android:layout_height="80dp"
                 android:background="@drawable/profile_text_btn"
@@ -164,7 +165,7 @@
             android:id="@+id/log_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:padding="15dp"
             android:scaleType="fitCenter"
             android:text="Log out"
