@@ -63,6 +63,7 @@ public class MapActivity extends AppCompatActivity {
     double longitude;
     private LocationManager locationManager;
     private Marker startMarker;
+
     private MapView map = null;
     private Context ctx;
     private MyLocationNewOverlay myLocationNewOverlay;
@@ -265,7 +266,6 @@ public class MapActivity extends AppCompatActivity {
         myLocationNewOverlay.enableFollowLocation();
         mapController.setZoom(18.5);
 
-        getLocation();
 
         Bitmap bitmapNotMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
         Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
@@ -281,6 +281,8 @@ public class MapActivity extends AppCompatActivity {
         touchOverlay = new Overlay() {
             ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay = null;
             Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.map_red, null);
+            Marker secondMarker = new Marker(map);
+
             @Override
             public void draw(Canvas arg0, MapView arg1, boolean arg2) {
             }
@@ -289,24 +291,27 @@ public class MapActivity extends AppCompatActivity {
             public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, final MapView pMapView) {
                 if (anotherItemizedIconOverlay != null) {
                     pMapView.getOverlays().remove(anotherItemizedIconOverlay);
+
                 }
+
                 latitude = pMapView.getMapCenter().getLatitude();
                 longitude = pMapView.getMapCenter().getLongitude();
 
                 address.setText(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
 
-                startMarker.setIcon(icon);
-                startMarker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
+                secondMarker.setIcon(icon);
+                secondMarker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
                         (float) pMapView.getMapCenter().getLongitude()));
 
-                startMarker.setTitle(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
+                secondMarker.setTitle(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
 
-                startMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                secondMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker, MapView mapView) {
                         return false;
                     }
                 });
+
 
                 return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
             }
@@ -331,19 +336,19 @@ public class MapActivity extends AppCompatActivity {
                 address.setText(getCompleteAddressString(latitude, longitude));
 
                 mapItem.setMarker(icon);
-                startMarker.setIcon(icon);
-                startMarker.setTitle(getCompleteAddressString(loc.getLatitude(), loc.getLongitude()));
-                startMarker.setPosition(loc);
-                startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                secondMarker.setIcon(icon);
+                secondMarker.setTitle(getCompleteAddressString(loc.getLatitude(), loc.getLongitude()));
+                secondMarker.setPosition(loc);
+                secondMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-                startMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                secondMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker, MapView mapView) {
                         return false;
                     }
                 });
 
-                map.getOverlays().add(startMarker);
+                map.getOverlays().add(secondMarker);
                 overlayArray.add(mapItem);
 
                 if (anotherItemizedIconOverlay == null) {
@@ -383,11 +388,11 @@ public class MapActivity extends AppCompatActivity {
         Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.map_red, null);
         GeoPoint myPosition = new GeoPoint(lat, longi);
 
+        startMarker = new Marker(map);
         map.getController().animateTo(myPosition);
         mapController.setZoom(18.5);
         mapController.setCenter(myPosition);
 
-        startMarker = new Marker(map);
         startMarker.setPosition(myPosition);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setIcon(icon);

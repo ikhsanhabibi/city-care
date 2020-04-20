@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="bottom_height">90dp</dimen>
+    <dimen name="app_camera_height">250dp</dimen>
 </resources>
