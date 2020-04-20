@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signin_signup_bg"
+    android:background="@mipmap/signin_signup_bg"
     tools:context=".activity.SignupSigninActivity">
 
     <LinearLayout

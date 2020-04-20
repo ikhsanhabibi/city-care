@@ -6,6 +6,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +23,7 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -193,7 +196,9 @@ public class MapActivity extends AppCompatActivity {
         builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                //startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                ActivityCompat.requestPermissions((Activity) ctx,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -203,6 +208,7 @@ public class MapActivity extends AppCompatActivity {
         });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+
     }
 
     private void getLocation() {

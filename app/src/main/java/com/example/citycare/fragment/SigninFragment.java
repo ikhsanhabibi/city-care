@@ -85,6 +85,7 @@ public class SigninFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Logged in successfully.", Toast.LENGTH_SHORT).show();
                                 Intent intToHome = new Intent(getActivity(), NavigationActivity.class);
                                 startActivity(intToHome);
+                                getActivity().finish();
                             }
                         }
                     });

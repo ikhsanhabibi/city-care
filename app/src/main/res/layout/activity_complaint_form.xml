@@ -36,127 +36,110 @@
         android:src="@drawable/home_logo" />
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="50dp">
+        android:layout_marginTop="50dp">
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="50dp"
+            android:orientation="vertical"
+            android:paddingTop="50dp">
 
-            <Spinner
-                android:id="@+id/spinner"
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/form_category_selector"
+                    android:paddingLeft="10dp"
+                    android:popupBackground="#ffffff"
+                    android:textColor="@color/grey" />
+
+            </RelativeLayout>
+
+
+            <EditText
+                android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
+                android:layout_height="200dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:autofillHints="description"
+                android:background="@drawable/form_round_btn"
+                android:gravity="top"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:padding="20dp" />
+
+
+            <TextView
+                android:id="@+id/uploadPictures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/form_category_selector"
-                android:paddingLeft="10dp"
-                android:popupBackground="#ffffff"
-                android:textColor="@color/grey" />
-
-        </RelativeLayout>
-
-
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="20dp"
-            android:autofillHints="description"
-            android:background="@drawable/form_round_btn"
-            android:gravity="top"
-            android:hint="@string/description"
-            android:inputType="textMultiLine"
-            android:padding="20dp" />
+                android:background="@drawable/form_round_btn"
+                android:drawableLeft="@drawable/ic_add_a_photo_black_24dp"
+                android:drawablePadding="10dp"
+                android:gravity="center|left"
+                android:padding="15dp"
+                android:paddingLeft="50dp"
+                android:paddingBottom="10dp"
+                android:text="Upload pictures"
+                android:textSize="17dp" />
 
 
-        <TextView
-            android:id="@+id/uploadPictures"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/form_round_btn"
-            android:drawableLeft="@drawable/ic_add_a_photo_black_24dp"
-            android:drawablePadding="10dp"
-            android:gravity="center|left"
-            android:padding="15dp"
-            android:paddingLeft="50dp"
-            android:paddingBottom="10dp"
-            android:text="Upload pictures"
-            android:textSize="17dp" />
-
-        <HorizontalScrollView
-            android:id="@+id/hori_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:fillViewport="false"
-            android:foregroundGravity="left"
-            >
-
-
-            <LinearLayout
-                android:id="@+id/selected_photos_container"
+            <TextView
+                android:id="@+id/selectLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:animateLayoutChanges="true"
-                android:gravity="left"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/form_round_btn"
+                android:drawableLeft="@drawable/ic_add_location_black_24dp"
+                android:drawablePadding="10dp"
+                android:gravity="center|left"
+                android:padding="15dp"
+                android:text="@string/select_location"
+                android:textSize="17dp" />
 
 
-                <!-- images will be added dynamicall to this layout -->
-            </LinearLayout>
-        </HorizontalScrollView>
+            <Button
+                android:id="@+id/continue_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/yellow_button"
+                android:text="@string/send"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
 
-
-        <TextView
-            android:id="@+id/selectLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/form_round_btn"
-            android:drawableLeft="@drawable/ic_add_location_black_24dp"
-            android:drawablePadding="10dp"
-            android:gravity="center|left"
-            android:padding="15dp"
-            android:text="@string/select_location"
-            android:textSize="17dp" />
-
-
-        <Button
-            android:id="@+id/continue_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/yellow_button"
-            android:text="@string/send"
-            android:textColor="#FFF"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
