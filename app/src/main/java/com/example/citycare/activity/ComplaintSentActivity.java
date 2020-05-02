@@ -14,6 +14,11 @@ public class ComplaintSentActivity extends AppCompatActivity {
     Button my_complaints;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_sent);

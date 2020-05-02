@@ -107,7 +107,7 @@
                 android:padding="15dp"
                 android:paddingLeft="50dp"
                 android:paddingBottom="10dp"
-                android:text="Upload pictures"
+                android:text="Upload picture"
                 android:textSize="17dp" />
 
 

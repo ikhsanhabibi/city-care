@@ -106,6 +106,8 @@ public class MapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent s = new Intent(MapActivity.this, ComplaintFormActivity.class);
                 s.putExtra("address", address.getText());
+                s.putExtra("latitude", latitude);
+                s.putExtra("longitude", longitude);
                 startActivity(s);
                 finish();
             }
@@ -132,7 +134,6 @@ public class MapActivity extends AppCompatActivity {
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             onGPS();
         } else {
-
             if (latitude != 0 && longitude != 0) {
                 showLastLocation(latitude, longitude);
                 address.setText(lastAddress);
@@ -143,11 +144,9 @@ public class MapActivity extends AppCompatActivity {
 
         }
 
-
         // Overlay map icon
         touchOverlay();
         map.getOverlays().add(touchOverlay);
-
 
     }
 
@@ -221,7 +220,7 @@ public class MapActivity extends AppCompatActivity {
             if (locationGPS != null) {
                 latitude = locationGPS.getLatitude();
                 longitude = locationGPS.getLongitude();
-                //address.setText(getCompleteAddressString(latitude, longitude));
+                address.setText(getCompleteAddressString(latitude, longitude));
             } else {
                 //Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
             }
@@ -257,13 +256,10 @@ public class MapActivity extends AppCompatActivity {
         myLocationNewOverlay.setDirectionArrow(bitmapNotMoving, bitmapMoving);
 
         map.getOverlays().add(myLocationNewOverlay);
-
     }
 
     private void goBackToDefaultLocation() {
         map.getOverlays().clear();
-        map.getOverlays().remove(startMarker);
-        map.invalidate();
 
         provider = new GpsMyLocationProvider(ctx);
         provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
@@ -272,13 +268,13 @@ public class MapActivity extends AppCompatActivity {
         myLocationNewOverlay.enableFollowLocation();
         mapController.setZoom(18.5);
 
-
         Bitmap bitmapNotMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
         Bitmap bitmapMoving = BitmapFactory.decodeResource(getResources(), R.drawable.map_red);
         myLocationNewOverlay.setDirectionArrow(bitmapNotMoving, bitmapMoving);
 
         map.getOverlays().add(myLocationNewOverlay);
         map.getOverlays().add(touchOverlay);
+        map.invalidate();
 
         address.setText(getCompleteAddressString(latitude, longitude));
     }
@@ -295,28 +291,44 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public boolean onScroll(MotionEvent pEvent1, MotionEvent pEvent2, float pDistanceX, float pDistanceY, final MapView pMapView) {
-                if (anotherItemizedIconOverlay != null) {
-                    pMapView.getOverlays().remove(anotherItemizedIconOverlay);
-
-                }
-
                 latitude = pMapView.getMapCenter().getLatitude();
                 longitude = pMapView.getMapCenter().getLongitude();
 
+                if (myLocationNewOverlay != null) {
+                    pMapView.getOverlays().remove(anotherItemizedIconOverlay);
+                    map.getOverlays().remove(myLocationNewOverlay);
+                    map.getOverlays().add(secondMarker);
+
+                    secondMarker.setIcon(icon);
+                    secondMarker.setPosition(new GeoPoint((float) latitude,
+                            (float) longitude));
+
+                } else if (anotherItemizedIconOverlay != null) {
+                    pMapView.getOverlays().remove(anotherItemizedIconOverlay);
+
+                    secondMarker.setIcon(icon);
+                    secondMarker.setPosition(new GeoPoint((float) latitude,
+                            (float) longitude));
+
+                    secondMarker.setTitle(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
+
+                    secondMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker, MapView mapView) {
+                            return false;
+                        }
+                    });
+
+                } else {
+                    map.getOverlays().remove(myLocationNewOverlay);
+                    map.getOverlays().add(secondMarker);
+
+                    secondMarker.setIcon(icon);
+                    secondMarker.setPosition(new GeoPoint((float) latitude,
+                            (float) longitude));
+                }
+
                 address.setText(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
-
-                secondMarker.setIcon(icon);
-                secondMarker.setPosition(new GeoPoint((float) pMapView.getMapCenter().getLatitude(),
-                        (float) pMapView.getMapCenter().getLongitude()));
-
-                secondMarker.setTitle(getCompleteAddressString(pMapView.getMapCenter().getLatitude(), pMapView.getMapCenter().getLongitude()));
-
-                secondMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker, MapView mapView) {
-                        return false;
-                    }
-                });
 
 
                 return super.onScroll(pEvent1, pEvent2, pDistanceX, pDistanceY, pMapView);
@@ -328,7 +340,6 @@ public class MapActivity extends AppCompatActivity {
                 mapView.getOverlays().remove(anotherItemizedIconOverlay);
                 if (startMarker != null) {
                     map.getOverlays().remove(startMarker);
-                    map.invalidate();
                 }
 
                 Projection proj = map.getProjection();

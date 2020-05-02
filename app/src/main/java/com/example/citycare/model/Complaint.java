@@ -15,27 +15,28 @@ public class Complaint {
     private String status;
     private String category;
     private String location;
+    private double latitude;
+    private double longitude;
+    private boolean anonymity;
+    private String imageUrl;
 
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
-    public Complaint(String description, Date timestamp, String email, String status, String category, String location) {
+    public Complaint(String description, Date timestamp, String email, String status, String category, String location, double latitude, double longitude, boolean anonymity, String imageUrl) {
         this.description = description;
         this.timestamp = timestamp;
         this.email = email;
         this.status = status;
         this.category = category;
+        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.anonymity = anonymity;
+        this.imageUrl = imageUrl;
     }
 
     public Complaint() {
-
     }
-
 
     public String getDescription() {
         return description;
@@ -77,4 +78,45 @@ public class Complaint {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public boolean isAnonymity() {
+        return anonymity;
+    }
+
+    public void setAnonymity(boolean anonymity) {
+        this.anonymity = anonymity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }

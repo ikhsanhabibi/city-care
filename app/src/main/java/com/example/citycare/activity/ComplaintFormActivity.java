@@ -1,14 +1,5 @@
 package com.example.citycare.activity;
 
-import androidx.annotation.NonNull;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.loader.content.CursorLoader;
-
-
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -19,47 +10,43 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Camera;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
-
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import com.example.citycare.BuildConfig;
 import com.example.citycare.R;
 import com.example.citycare.model.Complaint;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Executable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,11 +65,18 @@ public class ComplaintFormActivity extends AppCompatActivity {
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private String imgPath = null;
-    private String filename;
+    public Uri imgUri;
+    public String downloadUrl;
+    private float latitude;
+    private float longitude;
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
+        startActivity(s);
+        finish();
     }
 
     @Override
@@ -99,7 +93,6 @@ public class ComplaintFormActivity extends AppCompatActivity {
                 Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
                 startActivity(s);
                 finish();
-
             }
         });
 
@@ -109,22 +102,12 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
         editTextDescription = findViewById(R.id.description);
 
-
         upload_picture = findViewById(R.id.uploadPictures);
         upload_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-
-                if (!checkPermissions()) {
-                    requestPermissions();
-                } else {
-                    selectImage();
-                }
-
-
+                selectImage();
             }
         });
-
 
         select_location = findViewById(R.id.selectLocation);
         select_location.setOnClickListener(new View.OnClickListener() {
@@ -145,38 +128,75 @@ public class ComplaintFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendForm();
-
             }
         });
 
     }
 
-
-    private String getRealPathFromUri(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(ComplaintFormActivity.this, uri, projection, null, null, null);
-        Cursor cursor = cursorLoader.loadInBackground();
-        int column = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(column);
-        cursor.close();
-        return result;
+    private void takePicture() {
     }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",    /* suffix */
-                storageDir      /* directory */
-        );
+    private void chooseFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_IMAGE_GALLERY);
+    }
 
-        // Save a file: path for use with ACTION_VIEW intents
-        imgPath = image.getAbsolutePath();
-        return image;
+    public void ImageUpload(Uri imgUri, Bitmap bitmap) {
+        Date myDate = new Date();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(new SimpleDateFormat("dd-MM-yyyy").format(myDate));
+        final StorageReference mRef = storageReference.child("image_" + System.currentTimeMillis() + ".jpg");
+
+        // Image Compression
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        final byte[] data = baos.toByteArray();
+        UploadTask uploadTask = mRef.putFile(imgUri);
+
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                mRef.putBytes(data);
+                return mRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    String uri = task.getResult().toString();
+                    setDownloadUrl(uri);
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
+
+    }
+
+    public void setDownloadUrl(String url) {
+        this.downloadUrl = url;
+    }
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
     private void selectImage() {
@@ -190,42 +210,33 @@ public class ComplaintFormActivity extends AppCompatActivity {
                     if (options[item].equals("Take Photo")) {
                         dialog.dismiss();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                            if (ActivityCompat.checkSelfPermission(ComplaintFormActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                                //If permission is granted
+                                takePicture();
                             } else {
-                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                // Ensure that there's a camera activity to handle the intent
-                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                                    // Create the File where the photo should go
-                                    File photoFile = null;
-                                    try {
-                                        photoFile = createImageFile();
-                                    } catch (IOException ex) {
-                                        // Error occurred while creating the File
+                                requestPermissionsCamera();
 
-                                    }
-                                    // Continue only if the File was successfully created
-                                    if (photoFile != null) {
-                                        Uri photoURI = FileProvider.getUriForFile(ComplaintFormActivity.this,
-                                                BuildConfig.APPLICATION_ID + ".provider",
-                                                photoFile);
-                                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                                        startActivityForResult(takePictureIntent, PICK_IMAGE_CAMERA);
-                                        int index = photoFile.getName().lastIndexOf("/");
-                                        takePictureIntent.putExtra("filename", photoFile.getName().substring(index + 1));
-                                        filename = photoFile.getName().substring(index + 1);
-                                        System.out.println(filename);
-                                        upload_picture.setText(photoFile.getName().substring(index + 1));
-                                    }
-                                }
                             }
+                        } else {
+                            //no need to check permissions in android versions lower then marshmallow
+                            takePicture();
                         }
-
+                        takePicture();
                     } else if (options[item].equals("Choose From Gallery")) {
                         dialog.dismiss();
-                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
-                        
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (ActivityCompat.checkSelfPermission(ComplaintFormActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                                //If permission is granted
+                                chooseFromGallery();
+                            } else {
+                                requestPermissionsStorage();
+                            }
+                        } else {
+                            //no need to check permissions in android versions lower then marshmallow
+                            chooseFromGallery();
+                        }
+
+
                     } else if (options[item].equals("Cancel")) {
                         dialog.dismiss();
                     }
@@ -239,15 +250,42 @@ public class ComplaintFormActivity extends AppCompatActivity {
         }
     }
 
-    private void requestPermissions() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (data != null && requestCode == PICK_IMAGE_GALLERY) {
+            imgUri = data.getData();
+            imgPath = getRealPathFromURI(context, imgUri);
+            Bitmap bitmap = null;
+
+            String[] bits = imgPath.split("/");
+            String pictureName = bits[bits.length - 1];
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imgUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            upload_picture.setText(pictureName);
+            ImageUpload(imgUri, bitmap);
+        } else if (requestCode == PICK_IMAGE_GALLERY) {
+
+        } else {
+            Toast.makeText(ComplaintFormActivity.this, "Select an image please!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private void requestPermissionsCamera() {
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.CAMERA)) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
             alertBuilder.setCancelable(true);
             alertBuilder.setTitle("Permission necessary");
             alertBuilder.setMessage("CAMERA is necessary");
             alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                 public void onClick(DialogInterface dialog, int which) {
                     ActivityCompat.requestPermissions((Activity) context,
                             new String[]{Manifest.permission.CAMERA}, 100);
@@ -260,18 +298,35 @@ public class ComplaintFormActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkPermissions() {
-        int permissionState = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA);
-        return permissionState == PackageManager.PERMISSION_GRANTED;
-    }
 
+    private void requestPermissionsStorage() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+            alertBuilder.setCancelable(true);
+            alertBuilder.setTitle("Permission necessary");
+            alertBuilder.setMessage("Storage permission is necessary");
+            alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions((Activity) context,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+                }
+            });
+            AlertDialog alert = alertBuilder.create();
+            alert.show();
+        } else {
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+        }
+    }
 
     private void restoreLastValue() {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         String category = sharedPreferences.getString("category", "0");
         String desc = sharedPreferences.getString("desc", "");
+        String picture = sharedPreferences.getString("picture", getString(R.string.upload_picture));
         String location = sharedPreferences.getString("location", getString(R.string.select_location));
+        this.downloadUrl = sharedPreferences.getString("downloadUrl", "");
+        this.latitude = Float.parseFloat(sharedPreferences.getString("latitude", "0"));
+        this.longitude = Float.parseFloat(sharedPreferences.getString("longitude", "0"));
 
         String savedAddress = getIntent().getStringExtra("address");
 
@@ -285,6 +340,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
         spinner.setSelection(Integer.parseInt(category));
         editTextDescription.setText(desc);
+        upload_picture.setText(picture);
     }
 
     private void sendForm() {
@@ -292,6 +348,12 @@ public class ComplaintFormActivity extends AppCompatActivity {
         String stringEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String stringCategory = spinner.getSelectedItem().toString();
         String stringLocation = select_location.getText().toString();
+        String stringPicture = upload_picture.getText().toString();
+
+        if ((float) getIntent().getDoubleExtra("latitude", 0) != 0.0 && getIntent().getDoubleExtra("longitude", 0) != 0.0) {
+            latitude = (float) getIntent().getDoubleExtra("latitude", 0);
+            longitude = (float) getIntent().getDoubleExtra("longitude", 0);
+        }
 
         if (stringCategory == "Choose category" || stringCategory.isEmpty()) {
             spinner.requestFocus();
@@ -301,12 +363,16 @@ public class ComplaintFormActivity extends AppCompatActivity {
             editTextDescription.requestFocus();
             Toast.makeText(ComplaintFormActivity.this, "Write something please!", Toast.LENGTH_SHORT).show();
             return;
+        } else if (stringPicture.equals("Upload picture")) {
+            upload_picture.requestFocus();
+            Toast.makeText(ComplaintFormActivity.this, "Pick a picture please!", Toast.LENGTH_SHORT).show();
+            return;
         } else if (stringLocation.equals("Select location")) {
             select_location.requestFocus();
             Toast.makeText(ComplaintFormActivity.this, "Choose a location please!", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            createComplaint(stringDescription, stringEmail, stringCategory, stringLocation);
+            createComplaint(stringDescription, stringEmail, stringCategory, stringLocation, latitude, longitude);
         }
     }
 
@@ -347,14 +413,15 @@ public class ComplaintFormActivity extends AppCompatActivity {
         });
     }
 
-    public void createComplaint(String description, String email, final String category, String location) {
+    public void createComplaint(String description, String email, String category, String
+            location, double latitude, double longitude) {
+
+        // Saved Preferences
+        restoreLastValue();
 
         Complaint complaint;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference newComplaintRef = db.collection("complaints").document();
-
-        //DocumentReference userRef = db.collection("users").document(email);
-        //String name = userRef.get().getResult().getString("name");
 
         complaint = new Complaint();
         complaint.setStatus("SENT");
@@ -362,6 +429,9 @@ public class ComplaintFormActivity extends AppCompatActivity {
         complaint.setEmail(db.collection("users").document(email).getId());
         complaint.setCategory(category);
         complaint.setLocation(location);
+        complaint.setLatitude(latitude);
+        complaint.setLongitude(longitude);
+        complaint.setImageUrl(downloadUrl);
 
         newComplaintRef.set(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -389,7 +459,11 @@ public class ComplaintFormActivity extends AppCompatActivity {
         super.onStop();
         SavePreferences("desc", editTextDescription.getText().toString());
         SavePreferences("location", select_location.getText().toString());
+        SavePreferences("picture", upload_picture.getText().toString());
         SavePreferences("category", String.valueOf(spinner.getSelectedItemPosition()));
+        SavePreferences("downloadUrl", this.downloadUrl);
+        SavePreferences("latitude", String.valueOf(this.latitude));
+        SavePreferences("longitude", String.valueOf(this.longitude));
     }
 
     private void SavePreferences(String key, String value) {
@@ -400,9 +474,10 @@ public class ComplaintFormActivity extends AppCompatActivity {
     }
 
     public void clearForm() {
-        select_location.setText("");
+        select_location.setText(getString(R.string.select_location));
         editTextDescription.setText("");
         spinner.setSelection(0);
+        upload_picture.setText(getString(R.string.upload_picture));
     }
 
 
