@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,8 @@ public class SignupFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
+    private ProgressBar progress_bar;
+
     public SignupFragment() {
 
     }
@@ -67,6 +70,8 @@ public class SignupFragment extends Fragment {
         editTextEmail = view.findViewById(R.id.email);
         editTextPassword = view.findViewById(R.id.password);
         continue_btn = view.findViewById(R.id.continue_btn);
+        progress_bar = view.findViewById(R.id.progressBar);
+        progress_bar.setVisibility(View.INVISIBLE);
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -98,7 +103,6 @@ public class SignupFragment extends Fragment {
                     editTextPassword.requestFocus();
                     return;
                 } else if (!(email.isEmpty() && password.isEmpty())) {
-
                     DocumentReference docRef = firestore.collection("users").document(email);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -129,6 +133,7 @@ public class SignupFragment extends Fragment {
 
     // create account with email and password
     public void createAccount(final String email, final String password, final String name) {
+        progress_bar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -24,8 +24,8 @@ public class SignupSigninActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(SignupSigninActivity.this,Welcome2Activity.class);
-        startActivity(intent);
+        Intent s = new Intent(SignupSigninActivity.this, Welcome2Activity.class);
+        startActivity(s);
         finish();
     }
 

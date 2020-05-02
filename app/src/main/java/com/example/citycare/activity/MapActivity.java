@@ -125,8 +125,8 @@ public class MapActivity extends AppCompatActivity {
 
         // Saved Preferences
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        latitude = Double.parseDouble(sharedPreferences.getString("lat", "0"));
-        longitude = Double.parseDouble(sharedPreferences.getString("longi", "0"));
+        this.latitude = Double.parseDouble(sharedPreferences.getString("lat", "0"));
+        this.longitude = Double.parseDouble(sharedPreferences.getString("longi", "0"));
         String lastAddress = sharedPreferences.getString("address", "");
 
         // GPS settings
@@ -263,7 +263,7 @@ public class MapActivity extends AppCompatActivity {
 
         provider = new GpsMyLocationProvider(ctx);
         provider.addLocationSource(LocationManager.NETWORK_PROVIDER);
-        myLocationNewOverlay = new MyLocationNewOverlay(provider, map);
+        myLocationNewOverlay = new MyLocationNewOverlay(map);
         myLocationNewOverlay.enableMyLocation();
         myLocationNewOverlay.enableFollowLocation();
         mapController.setZoom(18.5);
@@ -276,7 +276,7 @@ public class MapActivity extends AppCompatActivity {
         map.getOverlays().add(touchOverlay);
         map.invalidate();
 
-        address.setText(getCompleteAddressString(latitude, longitude));
+        getLocation();
     }
 
     private void touchOverlay() {

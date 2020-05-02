@@ -16,6 +16,9 @@ public class ComplaintSentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(ComplaintSentActivity.this, ComplaintFormActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

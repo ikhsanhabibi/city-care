@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,8 @@ public class SigninFragment extends Fragment {
     private Button continue_btn;
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private ProgressBar progress_bar;
 
     public SigninFragment() {
 
@@ -55,6 +57,8 @@ public class SigninFragment extends Fragment {
         editTextEmail = view.findViewById(R.id.email);
         editTextPassword = view.findViewById(R.id.password);
         continue_btn = view.findViewById(R.id.continue_btn);
+        progress_bar = view.findViewById(R.id.progressBar);
+        progress_bar.setVisibility(View.INVISIBLE);
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +80,11 @@ public class SigninFragment extends Fragment {
                     editTextPassword.requestFocus();
 
                 } else if (!(email.isEmpty() && pwd.isEmpty())) {
+                    progress_bar.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            progress_bar.setVisibility(View.GONE);
                             if (!task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
                             } else {
@@ -86,6 +92,7 @@ public class SigninFragment extends Fragment {
                                 Intent intToHome = new Intent(getActivity(), NavigationActivity.class);
                                 startActivity(intToHome);
                                 getActivity().finish();
+
                             }
                         }
                     });

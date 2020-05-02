@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,25 +57,26 @@ import java.util.List;
 public class ComplaintFormActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
+    public Uri imgUri;
+    public String downloadUrl;
     TextView select_location, upload_picture;
     private ImageView left_btn;
     private Spinner spinner;
     private Button continue_btn;
     private EditText editTextDescription;
     private Context context;
-    private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private String imgPath = null;
-    public Uri imgUri;
-    public String downloadUrl;
     private float latitude;
     private float longitude;
+    private ProgressBar progress_bar;
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
+        Intent s = new Intent(ComplaintFormActivity.this, NavigationActivity.class);
         startActivity(s);
         finish();
     }
@@ -130,6 +132,9 @@ public class ComplaintFormActivity extends AppCompatActivity {
                 sendForm();
             }
         });
+
+        progress_bar = findViewById(R.id.progressBar);
+        progress_bar.setVisibility(View.INVISIBLE);
 
     }
 
@@ -298,7 +303,6 @@ public class ComplaintFormActivity extends AppCompatActivity {
         }
     }
 
-
     private void requestPermissionsStorage() {
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
@@ -372,6 +376,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
             Toast.makeText(ComplaintFormActivity.this, "Choose a location please!", Toast.LENGTH_SHORT).show();
             return;
         } else {
+            progress_bar.setVisibility(View.VISIBLE);
             createComplaint(stringDescription, stringEmail, stringCategory, stringLocation, latitude, longitude);
         }
     }
@@ -416,6 +421,8 @@ public class ComplaintFormActivity extends AppCompatActivity {
     public void createComplaint(String description, String email, String category, String
             location, double latitude, double longitude) {
 
+        progress_bar.setVisibility(View.VISIBLE);
+
         // Saved Preferences
         restoreLastValue();
 
@@ -436,7 +443,9 @@ public class ComplaintFormActivity extends AppCompatActivity {
         newComplaintRef.set(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                progress_bar.setVisibility(View.GONE);
                 startActivity(new Intent(getApplicationContext(), ComplaintSentActivity.class));
+                finish();
                 clearForm();
                 Log.d(TAG, "Complaint sent.");
             }
