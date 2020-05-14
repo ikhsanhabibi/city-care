@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.example.citycare.adapter.ComplaintsAdapter;
+import com.example.citycare.adapter.NotificationsAdapter;
 import com.example.citycare.R;
 import com.example.citycare.model.Complaint;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,62 +28,75 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ReportsActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
     private static final String TAG = "TAG";
-
-    RecyclerView recyclerView;
+    CollectionReference notifications;
+    ArrayList<Complaint> notificationsArrayList = new ArrayList<Complaint>();
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
     String email;
-    ArrayList<Complaint> complaintsArrayList = new ArrayList<Complaint>();
-    CollectionReference complaints;
-    private ImageView left_btn;
+    RecyclerView recyclerView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(ReportsActivity.this, ProfileActivity.class);
-        startActivity(intent);
-        finish();
-
+        finishAffinity();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reports);
+        setContentView(R.layout.activity_notifications);
 
-        left_btn = findViewById(R.id.left_btn);
-        left_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent s = new Intent(ReportsActivity.this, ProfileActivity.class);
-                startActivity(s);
-                finish();
-            }
-        });
-
+        // Firebase
+        auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
+        email = firebaseUser.getEmail();
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        notifications = FirebaseFirestore.getInstance().collection("notifications");
+        fetchAllNotifications();
 
-        // Firebase
-        auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        Intent intent2 = new Intent(NotificationsActivity.this, HomeActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                    case R.id.notifications:
+                        break;
+                    case R.id.faq:
+                        Intent intent3 = new Intent(NotificationsActivity.this, FAQActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.profile:
+                        Intent intent4 = new Intent(NotificationsActivity.this, ProfileActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return true;
+            }
 
-        email = firebaseUser.getEmail();
+        });
 
-        complaints = FirebaseFirestore.getInstance().collection("complaints");
-
-        fetchAllComplaints();
     }
 
+    private void fetchAllNotifications() {
 
-    private void fetchAllComplaints() {
-        complaintsArrayList.clear();
-        complaints.whereEqualTo("email", email).orderBy("timestamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        //notificationsArrayList.clear();
+        notifications.whereEqualTo("user", email).orderBy("timestamp", Query.Direction.DESCENDING).limit(8).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -90,7 +104,6 @@ public class ReportsActivity extends AppCompatActivity {
                         Complaint data = new Complaint();
                         String location = doc.getData().get("location").toString();
                         String category = doc.getData().get("category").toString();
-                        String description = doc.getData().get("description").toString();
                         String status = doc.getData().get("status").toString();
 
                         String str = doc.getData().get("timestamp").toString();
@@ -99,19 +112,14 @@ public class ReportsActivity extends AppCompatActivity {
                         long millis = seconds * 1000;
                         Date date = new Date(millis);
 
-                        String imageUrl = doc.getData().get("imageUrl").toString();
-
                         data.setLocation(location);
                         data.setCategory(category);
                         data.setStatus(status);
-                        data.setDescription(description);
                         data.setTimestamp(date);
-                        data.setImageUrl(imageUrl);
-                        complaintsArrayList.add(data);
-
+                        notificationsArrayList.add(data);
                     }
 
-                    ComplaintsAdapter adapter = new ComplaintsAdapter(ReportsActivity.this, complaintsArrayList);
+                    NotificationsAdapter adapter = new NotificationsAdapter(NotificationsActivity.this, notificationsArrayList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 } else {
@@ -124,5 +132,6 @@ public class ReportsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        overridePendingTransition(0, 0);
     }
 }

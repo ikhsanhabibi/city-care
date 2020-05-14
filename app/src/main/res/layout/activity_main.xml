@@ -7,5 +7,4 @@
     android:background="@mipmap/main_bg"
     tools:context=".MainActivity">
 
-
 </RelativeLayout>

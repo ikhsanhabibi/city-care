@@ -39,8 +39,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
 
         <LinearLayout
@@ -51,9 +51,9 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="25dp"
-            android:paddingBottom="50dp"
             android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp">
 
 
             <RelativeLayout
@@ -107,7 +107,7 @@
                 android:padding="15dp"
                 android:paddingLeft="50dp"
                 android:paddingBottom="10dp"
-                android:text="Upload picture"
+                android:text="@string/upload_picture"
                 android:textSize="17dp" />
 
 
@@ -147,8 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_gravity = "center"
-        />
+        android:layout_gravity="center" />
 
 
 </RelativeLayout>

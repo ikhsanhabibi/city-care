@@ -82,24 +82,24 @@ public class SignupFragment extends Fragment {
                 final String password = editTextPassword.getText().toString();
 
                 if (name.isEmpty()) {
-                    editTextName.setError("Name is required");
+                    editTextName.setError(getResources().getString(R.string.name_required));
                     editTextName.requestFocus();
                     return;
                 } else if (email.isEmpty()) {
-                    editTextEmail.setError("Email is required");
+                    editTextEmail.setError(getResources().getString(R.string.email_required));
                     editTextEmail.requestFocus();
                     return;
 
                 } else if (!isEmailValid(email)) {
-                    editTextEmail.setError("Please enter a valid email");
+                    editTextEmail.setError(getResources().getString(R.string.enter_valid_email));
                     editTextEmail.requestFocus();
                     return;
                 } else if (password.isEmpty()) {
-                    editTextPassword.setError("Password is required");
+                    editTextPassword.setError(getResources().getString(R.string.enter_password));
                     editTextEmail.requestFocus();
                     return;
                 } else if (password.length() < 6) {
-                    editTextPassword.setError("Minimum length of the password should be 6");
+                    editTextPassword.setError(getResources().getString(R.string.min_password));
                     editTextPassword.requestFocus();
                     return;
                 } else if (!(email.isEmpty() && password.isEmpty())) {
@@ -111,7 +111,7 @@ public class SignupFragment extends Fragment {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
                                     Log.d(TAG, "User already exists.");
-                                    Toast.makeText(getActivity(), "User already exists.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
                                 } else {
                                     Log.d(TAG, "Creating new user");
                                     createAccount(email, password, name);
@@ -123,7 +123,7 @@ public class SignupFragment extends Fragment {
                     });
 
                 } else {
-                    Toast.makeText(getActivity(), "Error!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.error_occured), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -138,7 +138,7 @@ public class SignupFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.register_succesful), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getContext(), SignupSigninActivity.class));
 
                     DocumentReference documentReference = firestore.collection("users").document(email);

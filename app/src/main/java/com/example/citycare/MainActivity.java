@@ -5,11 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.citycare.activity.ComplaintFormActivity;
-import com.example.citycare.activity.MapActivity;
-import com.example.citycare.activity.NavigationActivity;
-import com.example.citycare.activity.SignupSigninActivity;
-import com.example.citycare.activity.WelcomeActivity;
+import com.example.citycare.activity.ChooseLanguageActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), ChooseLanguageActivity.class));
             }
-        }, 3500);
+        }, 2500);
 
     }
 

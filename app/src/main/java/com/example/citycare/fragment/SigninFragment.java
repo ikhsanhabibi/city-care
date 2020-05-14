@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.citycare.R;
-import com.example.citycare.activity.NavigationActivity;
+import com.example.citycare.activity.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -67,16 +67,16 @@ public class SigninFragment extends Fragment {
                 String pwd = editTextPassword.getText().toString();
 
                 if (email.isEmpty() && pwd.isEmpty()) {
-                    Toast.makeText(getContext(), "Fields Are Empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.fields_empty), Toast.LENGTH_SHORT).show();
                 } else if (email.isEmpty()) {
-                    editTextEmail.setError("Please enter your email!");
+                    editTextEmail.setError(getResources().getString(R.string.enter_email));
                     editTextEmail.requestFocus();
                 } else if (!isEmailValid(email)) {
-                    editTextEmail.setError("Please enter a valid email");
+                    editTextEmail.setError(getResources().getString(R.string.enter_valid_email));
                     editTextEmail.requestFocus();
                     return;
                 } else if (pwd.isEmpty()) {
-                    editTextPassword.setError("Please enter your password!");
+                    editTextPassword.setError(getResources().getString(R.string.enter_password));
                     editTextPassword.requestFocus();
 
                 } else if (!(email.isEmpty() && pwd.isEmpty())) {
@@ -86,18 +86,17 @@ public class SigninFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progress_bar.setVisibility(View.GONE);
                             if (!task.isSuccessful()) {
-                                Toast.makeText(getActivity(), "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), getResources().getString(R.string.login_error), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getActivity(), "Logged in successfully.", Toast.LENGTH_SHORT).show();
-                                Intent intToHome = new Intent(getActivity(), NavigationActivity.class);
+                                Toast.makeText(getActivity(), getResources().getString(R.string.login_succesful), Toast.LENGTH_SHORT).show();
+                                Intent intToHome = new Intent(getActivity(), HomeActivity.class);
                                 startActivity(intToHome);
                                 getActivity().finish();
-
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(getContext(), "Error Occurred!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.error_occured), Toast.LENGTH_SHORT).show();
 
                 }
             }

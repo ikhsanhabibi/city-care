@@ -6,7 +6,6 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,29 +18,23 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.citycare.BuildConfig;
 import com.example.citycare.R;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
@@ -80,9 +73,19 @@ public class MapActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(MapActivity.this, ComplaintFormActivity.class);
-        startActivity(intent);
-        finish();
+        Intent intent = getIntent();
+        String previousActivity = intent.getStringExtra("FROM_ACTIVITY");
+        if (previousActivity.equals("COMPLAINT")) {
+            Intent newIntent = new Intent(this, ComplaintFormActivity.class);
+            startActivity(newIntent);
+            finish();
+        } else {
+            Intent newIntent = new Intent(this, SuggestionFormActivity.class);
+            startActivity(newIntent);
+            finish();
+        }
+
+
     }
 
     @Override
@@ -179,12 +182,12 @@ public class MapActivity extends AppCompatActivity {
                 strAdd = strReturnedAddress.toString();
                 // Log.w(TAG, strReturnedAddress.toString());
             } else {
-                strAdd = "Finding location...";
+                strAdd = getResources().getString(R.string.finding_location);
                 Log.w(TAG, "No Address returned!");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            strAdd = "Finding location...";
+            strAdd = getResources().getString(R.string.finding_location);
             Log.w(TAG, "Can not get Address!");
         }
         return strAdd.trim();
@@ -192,14 +195,14 @@ public class MapActivity extends AppCompatActivity {
 
     private void onGPS() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setMessage(getResources().getString(R.string.enable_gps)).setCancelable(false).setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                 ActivityCompat.requestPermissions((Activity) ctx,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

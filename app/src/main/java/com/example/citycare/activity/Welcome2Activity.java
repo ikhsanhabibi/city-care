@@ -25,10 +25,9 @@ public class Welcome2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(Welcome2Activity.this, NavigationActivity.class));
+            startActivity(new Intent(Welcome2Activity.this, HomeActivity.class));
             finish();
         }
 

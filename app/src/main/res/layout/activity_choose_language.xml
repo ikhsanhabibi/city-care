@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    tools:context=".activity.ChooseLanguageActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:paddingBottom="30dp"
+            android:scaleType="fitCenter"
+            android:text="@string/choose_your_language"
+            android:textAlignment="center"
+            android:textColor="#515C6F"
+            android:textSize="25dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp">
+
+            <RadioButton
+                android:id="@+id/english"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="English" />
+
+            <RadioButton
+                android:id="@+id/german"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deutsch" />
+
+            <RadioButton
+                android:id="@+id/hindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hindi" />
+
+            <RadioButton
+                android:id="@+id/bahasa_indonesia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indonesia" />
+
+            <RadioButton
+                android:id="@+id/javanese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Javanese" />
+
+            <RadioButton
+                android:id="@+id/bahasa_sunda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Basa Sunda" />
+
+            <RadioButton
+                android:id="@+id/espanol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Español" />
+
+
+            <RadioButton
+                android:id="@+id/portuguese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Português" />
+
+
+            <RadioButton
+                android:id="@+id/polish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Polish" />
+
+            <RadioButton
+                android:id="@+id/russian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="русский язык" />
+
+            <RadioButton
+                android:id="@+id/chinese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="官话" />
+
+            <RadioButton
+                android:id="@+id/korean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="한국어" />
+
+            <RadioButton
+                android:id="@+id/japanese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日本語" />
+
+            <RadioButton
+                android:id="@+id/arabic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="العربية" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"></Button>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

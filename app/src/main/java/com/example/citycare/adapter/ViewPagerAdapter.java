@@ -1,4 +1,4 @@
-package com.example.citycare;
+package com.example.citycare.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -11,7 +11,7 @@ import com.example.citycare.fragment.SignupFragment;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private int tabsNumber;
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior,int tabs) {
+    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior, int tabs) {
         super(fm, behavior);
         this.tabsNumber = tabs;
     }
@@ -19,12 +19,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new SigninFragment();
             case 1:
                 return new SignupFragment();
-            default: return null;
+            default:
+                return null;
         }
     }
 
@@ -33,5 +34,5 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return tabsNumber;
     }
 
-    
+
 }

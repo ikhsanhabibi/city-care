@@ -1,7 +1,6 @@
 package com.example.citycare.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -57,7 +56,6 @@ import java.util.List;
 public class ComplaintFormActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     public Uri imgUri;
     public String downloadUrl;
@@ -76,7 +74,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent s = new Intent(ComplaintFormActivity.this, NavigationActivity.class);
+        Intent s = new Intent(ComplaintFormActivity.this, HomeActivity.class);
         startActivity(s);
         finish();
     }
@@ -92,7 +90,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
         left_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent s = new Intent(getApplicationContext(), NavigationActivity.class);
+                Intent s = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(s);
                 finish();
             }
@@ -116,6 +114,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent s = new Intent(getApplicationContext(), MapActivity.class);
+                s.putExtra("FROM_ACTIVITY", "COMPLAINT");
                 startActivity(s);
                 finish();
             }
@@ -164,7 +163,6 @@ public class ComplaintFormActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     throw task.getException();
                 }
-
                 // Continue with the task to get the download URL
                 mRef.putBytes(data);
                 return mRef.getDownloadUrl();
@@ -177,7 +175,6 @@ public class ComplaintFormActivity extends AppCompatActivity {
                     setDownloadUrl(uri);
                 } else {
                     // Handle failures
-                    // ...
                 }
             }
         });
@@ -206,13 +203,13 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
     private void selectImage() {
         try {
-            final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
+            final CharSequence[] options = {getResources().getString(R.string.take_photo), getResources().getString(R.string.choose_from_gallery), getResources().getString(R.string.cancel)};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Select Option");
+            builder.setTitle(getResources().getString(R.string.select_option));
             builder.setItems(options, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int item) {
-                    if (options[item].equals("Take Photo")) {
+                    if (options[item].equals(getResources().getString(R.string.take_photo))) {
                         dialog.dismiss();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (ActivityCompat.checkSelfPermission(ComplaintFormActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -227,7 +224,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
                             takePicture();
                         }
                         takePicture();
-                    } else if (options[item].equals("Choose From Gallery")) {
+                    } else if (options[item].equals(getResources().getString(R.string.choose_from_gallery))) {
                         dialog.dismiss();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (ActivityCompat.checkSelfPermission(ComplaintFormActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -242,7 +239,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
                         }
 
 
-                    } else if (options[item].equals("Cancel")) {
+                    } else if (options[item].equals(getResources().getString(R.string.cancel))) {
                         dialog.dismiss();
                     }
                 }
@@ -275,10 +272,10 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
             upload_picture.setText(pictureName);
             ImageUpload(imgUri, bitmap);
-        } else if (requestCode == PICK_IMAGE_GALLERY) {
+        } else if (requestCode == PICK_IMAGE_CAMERA) {
 
         } else {
-            Toast.makeText(ComplaintFormActivity.this, "Select an image please!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.select_image_please), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -288,8 +285,8 @@ public class ComplaintFormActivity extends AppCompatActivity {
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.CAMERA)) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
             alertBuilder.setCancelable(true);
-            alertBuilder.setTitle("Permission necessary");
-            alertBuilder.setMessage("CAMERA is necessary");
+            alertBuilder.setTitle(getResources().getString(R.string.permission_necessary));
+            alertBuilder.setMessage(getResources().getString(R.string.camera_necessary));
             alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     ActivityCompat.requestPermissions((Activity) context,
@@ -307,8 +304,8 @@ public class ComplaintFormActivity extends AppCompatActivity {
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
             alertBuilder.setCancelable(true);
-            alertBuilder.setTitle("Permission necessary");
-            alertBuilder.setMessage("Storage permission is necessary");
+            alertBuilder.setTitle(getResources().getString(R.string.permission_necessary));
+            alertBuilder.setMessage(getResources().getString(R.string.storage_necessary));
             alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     ActivityCompat.requestPermissions((Activity) context,
@@ -359,21 +356,21 @@ public class ComplaintFormActivity extends AppCompatActivity {
             longitude = (float) getIntent().getDoubleExtra("longitude", 0);
         }
 
-        if (stringCategory == "Choose category" || stringCategory.isEmpty()) {
+        if (stringCategory == getResources().getString(R.string.choose_category) || stringCategory.isEmpty()) {
             spinner.requestFocus();
-            Toast.makeText(ComplaintFormActivity.this, "Choose category please!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.choose_category_please), Toast.LENGTH_SHORT).show();
             return;
         } else if (stringCategory == "" || stringDescription.isEmpty()) {
             editTextDescription.requestFocus();
-            Toast.makeText(ComplaintFormActivity.this, "Write something please!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.write_something), Toast.LENGTH_SHORT).show();
             return;
-        } else if (stringPicture.equals("Upload picture")) {
+        } else if (stringPicture.equals(getResources().getString(R.string.upload_picture))) {
             upload_picture.requestFocus();
-            Toast.makeText(ComplaintFormActivity.this, "Pick a picture please!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.pick_picture), Toast.LENGTH_SHORT).show();
             return;
-        } else if (stringLocation.equals("Select location")) {
+        } else if (stringLocation.equals(getResources().getString(R.string.select_location))) {
             select_location.requestFocus();
-            Toast.makeText(ComplaintFormActivity.this, "Choose a location please!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.choose_location), Toast.LENGTH_SHORT).show();
             return;
         } else {
             progress_bar.setVisibility(View.VISIBLE);
@@ -383,12 +380,24 @@ public class ComplaintFormActivity extends AppCompatActivity {
 
     private void createSpinner() {
         List<String> categories = new ArrayList<>();
-        categories.add(0, "Choose category");
-        categories.add("Road");
-        categories.add("Park");
-        categories.add("Bridge");
-        categories.add("Side walk");
-        categories.add("Other");
+        categories.add(0, getResources().getString(R.string.choose_category));
+        categories.add(getResources().getString(R.string.road));
+        categories.add(getResources().getString(R.string.park));
+        categories.add(getResources().getString(R.string.bridge));
+        categories.add(getResources().getString(R.string.side_walk));
+        categories.add(getResources().getString(R.string.field));
+        categories.add(getResources().getString(R.string.bike_lane));
+        categories.add(getResources().getString(R.string.tunnel));
+        categories.add(getResources().getString(R.string.parking_area));
+        categories.add(getResources().getString(R.string.traffic_sign));
+        categories.add(getResources().getString(R.string.bus));
+        categories.add(getResources().getString(R.string.train));
+        categories.add(getResources().getString(R.string.tram));
+        categories.add(getResources().getString(R.string.waterway));
+        categories.add(getResources().getString(R.string.canal));
+        categories.add(getResources().getString(R.string.port));
+        categories.add(getResources().getString(R.string.airport));
+        categories.add(getResources().getString(R.string.other));
 
         // Style and populate the spinner
         ArrayAdapter<String> dataAdapter;
@@ -403,7 +412,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
-                if (parent.getItemAtPosition(position).equals("Choose category")) {
+                if (parent.getItemAtPosition(position).equals(getResources().getString(R.string.choose_category))) {
 
                 } else {
                     String item = parent.getItemAtPosition(position).toString();
@@ -431,13 +440,14 @@ public class ComplaintFormActivity extends AppCompatActivity {
         DocumentReference newComplaintRef = db.collection("complaints").document();
 
         complaint = new Complaint();
-        complaint.setStatus("SENT");
+        complaint.setStatus(getResources().getString(R.string.sent));
         complaint.setDescription(description);
         complaint.setEmail(db.collection("users").document(email).getId());
         complaint.setCategory(category);
         complaint.setLocation(location);
         complaint.setLatitude(latitude);
         complaint.setLongitude(longitude);
+        complaint.setType(getResources().getString(R.string.complaint_type));
         complaint.setImageUrl(downloadUrl);
 
         newComplaintRef.set(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -483,10 +493,10 @@ public class ComplaintFormActivity extends AppCompatActivity {
     }
 
     public void clearForm() {
-        select_location.setText(getString(R.string.select_location));
+        select_location.setText(getResources().getString(R.string.select_location));
         editTextDescription.setText("");
         spinner.setSelection(0);
-        upload_picture.setText(getString(R.string.upload_picture));
+        upload_picture.setText(getResources().getString(R.string.upload_picture));
     }
 
 

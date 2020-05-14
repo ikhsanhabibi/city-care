@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.citycare.R;
-import com.example.citycare.ViewPagerAdapter;
-import com.example.citycare.fragment.SigninFragment;
+import com.example.citycare.adapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupSigninActivity extends AppCompatActivity {
 

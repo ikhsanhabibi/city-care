@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">City Care</string>
+
+
+    <string name="welcome_to">Willkommen zu</string>
+
+    <string name="ccs">Beschwerdeservice für Bürger</string>
+
+    <string name="get_started">Loslegen</string>
+
+    <string name="sign_up">Registrieren</string>
+
+    <string name="sign_in">Anmelden</string>
+
+    <string name="report_it">Melde es, wir kümmern uns darum!</string>
+
+    <string name="email_address">E-Mail-Addresse</string>
+
+    <string name="password">Passwort</string>
+
+    <string name="continue_btn">Fortsetzen</string>
+
+    <string name="forgot_password">Passwort vergessen?</string>
+
+    <string name="or">oder</string>
+
+    <string name="google_btn">Mit Google einloggen</string>
+
+    <string name="fb_btn">Mit Facebook einloggen</string>
+
+    <string name="name">Name</string>
+
+    <string name="send">Senden</string>
+
+    <string name="description">Beschreibung</string>
+
+    <string name="title">Titel</string>
+
+    <string name="my_complaints">Meine Beschwerden</string>
+
+    <string name="complaints_sent">Beschwerde wird gesendet!</string>
+
+    <string name="complaints_success">Ihre Beschwerde wurde erfolgreich gesendet. Weitere Informationen finden Sie auf der Seite Alle meine Berichte auf der Registerkarte Profil</string>
+
+    <string name="my_suggestions">Meine Vorschläge</string>
+
+    <string name="suggestions_sent">Vorschlag wird gesendet!</string>
+
+    <string name="suggestions_success">Ihr Vorschlag wurde erfolgreich gesendet. Weitere Informationen finden Sie auf der Seite Alle meine Berichte auf der Registerkarte Profil</string>
+
+    <string name="select_location">Ort auswählen</string>
+
+    <string name="upload_picture">Bild hochladen</string>
+
+    <string name="choose_category">Kategorie auswählen</string>
+
+    <string name="complaint_type">BESCHWERDE</string>
+
+    <string name="suggestion_type">VORSCHLAG</string>
+
+    <string name="sent">GESCHICKT</string>
+
+    <string name="in_progress">IN BEARBEITUNG</string>
+
+    <string name="done">ERLEDIGT</string>
+
+    <string name="review">ÜBERPRÜFT</string>
+
+    <string name="take_photo">Foto aufnehmen</string>
+
+    <string name="choose_from_gallery">Wählen Sie aus der Galerie</string>
+
+    <string name="cancel">Abbrechen</string>
+
+    <string name="select_option">Wähle eine Option</string>
+
+    <string name="select_image_please">Wählen Sie bitte ein Bild!</string>
+
+    <string name="permission_necessary">Erlaubnis erforderlich!</string>
+
+    <string name="camera_necessary">Kamera ist notwendig!</string>
+
+    <string name="storage_necessary">Speichererlaubnis erforderlich!</string>
+
+    <string name="choose_category_please">Kategorie bitte auswählen!</string>
+
+    <string name="write_something">Schreiben Sie bitte etwas!</string>
+
+    <string name="pick_picture">Bitte ein Bild auswählen!</string>
+
+    <string name="choose_location">Wählen Sie bitte einen Ort!</string>
+
+    <string name="road">Straße</string>
+
+    <string name="park">Park</string>
+
+    <string name="bridge">Brücke</string>
+
+    <string name="side_walk">Bürgersteig</string>
+
+    <string name="field">Feld</string>
+
+    <string name="bike_lane">Radweg</string>
+
+    <string name="tunnel">Tunnel</string>
+
+    <string name="parking_area">Parkplatz</string>
+
+    <string name="traffic_sign">Verkehrsschilder</string>
+
+    <string name="bus">Bus</string>
+
+    <string name="train">Zug</string>
+
+    <string name="tram">Straßenbahn</string>
+
+    <string name="waterway">Wasserweg</string>
+
+    <string name="canal">Kanal</string>
+
+    <string name="port">Hafen</string>
+
+    <string name="airport">Flughafen</string>
+
+    <string name="other">Andere</string>
+
+    <string name="finding_location">Ort finden ...</string>
+
+    <string name="set_location">Ort festlegen</string>
+
+    <string name="enable_gps">GPS aktivieren?</string>
+
+    <string name="yes">Ja</string>
+
+    <string name="no">Nein</string>
+
+    <string name="login_succesful">Erfolgreich eingeloggt.</string>
+
+    <string name="logout_succesful">Erfolgreich abgemeldet.</string>
+
+    <string name="fields_empty">Felder sind leer!</string>
+
+    <string name="enter_email">Bitte geben Sie ihre E-Mail-Adresse ein!</string>
+
+    <string name="enter_valid_email">Bitte geben Sie eine gültige Email-Adresse ein!</string>
+
+    <string name="enter_password">Bitte geben Sie Ihr Passwort ein!</string>
+
+    <string name="login_error">Anmeldefehler, bitte erneut anmelden!</string>
+
+    <string name="error_occured">Ein Fehler ist aufgetreten!</string>
+
+    <string name="name_required">Name ist erforderlich!</string>
+
+    <string name="email_required">E-Mail ist erforderlich!</string>
+
+    <string name="password_required">Passwort wird benötigt!</string>
+
+    <string name="min_password">Die Mindestlänge des Passworts sollte 6 betragen!</string>
+
+    <string name="user_exists">Benutzer existiert bereits!</string>
+
+    <string name="creating_user">Neuen Benutzer erstellen ...</string>
+
+    <string name="register_succesful">Benutzer erfolgreich registriert.</string>
+
+    <string name="selected_language">Ausgewählte Sprache:</string>
+
+    <string name="your_complaint_about">Ihre Beschwerde über</string>
+
+    <string name="in">in</string>
+
+    <string name="new_status">wurde aktualisiert. Der neue Status ist</string>
+
+    <string name="faq">Hilfe</string>
+
+    <string name="choose_your_language">Wähle Ihre Sprache</string>
+
+    <string name="apply">ANWENDEN</string>
+
+    <string name="notifications">Benachrichtigungen</string>
+
+    <string name="edit_profile">PROFIL BEARBEITEN</string>
+
+    <string name="reports">Berichte</string>
+
+    <string name="important_numbers">Wichtige Telefonnummer</string>
+
+    <string name="language_setting">Spracheinstellungen</string>
+
+    <string name="log_out">Ausloggen</string>
+
+    <string name="home">Startseite</string>
+
+    <string name="account">Konto</string>
+</resources>

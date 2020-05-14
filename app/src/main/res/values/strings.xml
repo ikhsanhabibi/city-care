@@ -14,8 +14,6 @@
     <string name="google_btn">Login with google</string>
     <string name="fb_btn">Login with facebook</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Name</string>
     <string name="send">Send</string>
     <string name="description">Description</string>
@@ -26,8 +24,92 @@
     <string name="my_suggestions">My Suggestions</string>
     <string name="suggestions_sent">Suggestion is sent!</string>
     <string name="suggestions_success">Your suggestion was sent successfully. For more details, check All My Reports page under Profile tab</string>
+
     <string name="select_location">Select location</string>
     <string name="upload_picture">Upload picture</string>
+    <string name="choose_category">Choose category</string>
+
+    <string name="complaint_type">COMPLAINT</string>
+    <string name="suggestion_type">SUGGESTION</string>
+
+    <string name="sent">SENT</string>
+    <string name="in_progress">IN PROGRESS</string>
+    <string name="done">DONE</string>
+    <string name="review">REVIEWED</string>
+
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose From Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_option">Select Option</string>
+
+    <string name="select_image_please">Select an image please!</string>
+    <string name="permission_necessary">Permission necessary!</string>
+    <string name="camera_necessary">Camera is necessary!</string>
+    <string name="storage_necessary">Storage permission is necessary!</string>
+
+    <string name="choose_category_please">Choose category please!</string>
+    <string name="write_something">Write something please!</string>
+    <string name="pick_picture">Pick a picture please!</string>
+    <string name="choose_location">Choose a location please!</string>
+
+    <string name="road">Road</string>
+    <string name="park">Park</string>
+    <string name="bridge">Bridge</string>
+    <string name="side_walk">Side walk</string>
+    <string name="field">Field</string>
+    <string name="bike_lane">Bike lane</string>
+    <string name="tunnel">Tunnel</string>
+    <string name="parking_area">Parking area</string>
+    <string name="traffic_sign">Traffic sign</string>
+    <string name="bus">Bus</string>
+    <string name="train">Train</string>
+    <string name="tram">Tram</string>
+    <string name="waterway">Waterway</string>
+    <string name="canal">Canal</string>
+    <string name="port">Port</string>
+    <string name="airport">Airport</string>
+    <string name="other">Other</string>
+
+    <string name="finding_location">Finding location...</string>
+    <string name="set_location">Set location</string>
+    <string name="enable_gps">Enable GPS?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="login_succesful">Logged in successfully.</string>
+    <string name="logout_succesful">Logged out successfully.</string>
+    <string name="fields_empty">Fields are empty!</string>
+    <string name="enter_email">Please enter your email!</string>
+    <string name="enter_valid_email">Please enter a valid email!</string>
+    <string name="enter_password">Please enter your password!</string>
+    <string name="login_error">Login error, please login again!</string>
+    <string name="error_occured">Error occurred!</string>
+
+
+    <string name="name_required">Name is required!</string>
+    <string name="email_required">Email is required!</string>
+    <string name="password_required">Password is required!</string>
+    <string name="min_password">Minimum length of the password should be 6!</string>
+    <string name="user_exists">User already exists!</string>
+    <string name="creating_user">Creating new user...</string>
+    <string name="register_succesful">User registered successfully.</string>
+
+    <string name="selected_language">Selected Language: </string>
+    <string name="your_complaint_about">Your complaint about </string>
+    <string name="in"> in </string>
+    <string name="new_status"> has been updated. The new status is </string>
+
+    <string name="faq">FAQ</string>
+    <string name="choose_your_language">Choose your language</string>
+    <string name="apply">APPLY</string>
+    <string name="notifications">Notifications</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="reports">Reports</string>
+    <string name="important_numbers">Important numbers</string>
+    <string name="language_setting">Language setting</string>
+    <string name="log_out">Log out</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
 
 
 </resources>

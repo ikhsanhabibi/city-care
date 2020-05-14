@@ -19,10 +19,10 @@ public class Complaint {
     private double longitude;
     private boolean anonymity;
     private String imageUrl;
+    private String type;
 
 
-
-    public Complaint(String description, Date timestamp, String email, String status, String category, String location, double latitude, double longitude, boolean anonymity, String imageUrl) {
+    public Complaint(String description, Date timestamp, String email, String status, String category, String location, double latitude, double longitude, boolean anonymity, String imageUrl, String type) {
         this.description = description;
         this.timestamp = timestamp;
         this.email = email;
@@ -33,6 +33,7 @@ public class Complaint {
         this.longitude = longitude;
         this.anonymity = anonymity;
         this.imageUrl = imageUrl;
+        this.type = type;
     }
 
     public Complaint() {
@@ -117,6 +118,14 @@ public class Complaint {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }
