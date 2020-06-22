@@ -107,12 +107,24 @@ public class MapActivity extends AppCompatActivity {
         set_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent s = new Intent(MapActivity.this, ComplaintFormActivity.class);
-                s.putExtra("address", address.getText());
-                s.putExtra("latitude", latitude);
-                s.putExtra("longitude", longitude);
-                startActivity(s);
-                finish();
+                Intent intent = getIntent();
+                String previousActivity = intent.getStringExtra("FROM_ACTIVITY");
+                if (previousActivity.equals("COMPLAINT")) {
+                    Intent c = new Intent(getApplicationContext(), ComplaintFormActivity.class);
+                    c.putExtra("address", address.getText());
+                    c.putExtra("latitude", latitude);
+                    c.putExtra("longitude", longitude);
+                    startActivity(c);
+                    finish();
+                } else {
+                    Intent s = new Intent(getApplicationContext(), SuggestionFormActivity.class);
+                    s.putExtra("address", address.getText());
+                    s.putExtra("latitude", latitude);
+                    s.putExtra("longitude", longitude);
+                    startActivity(s);
+                    finish();
+                }
+
             }
         });
 

@@ -24,9 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:src="@drawable/home_logo" />
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/main_logo" />
 
 
     <LinearLayout

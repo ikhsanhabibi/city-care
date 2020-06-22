@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightGrey"
-    tools:context=".activity.NotificationsActivity">
+    tools:context=".activity.MoreActivity">
 
 
     <ImageView
@@ -20,13 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:src="@drawable/home_logo" />
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/main_logo" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/faq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -42,26 +43,55 @@
             android:layout_marginTop="79dp"
             android:fontFamily="sans-serif-black"
             android:scaleType="fitCenter"
-            android:text="@string/notifications"
+            android:text="@string/more"
             android:textAlignment="center"
             android:textColor="#515C6F"
             android:textSize="25dp" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="60dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:scrollbarSize="5dp"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical" />
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/languageSetting"
+                android:layout_width="350dp"
+                android:layout_height="85dp"
+                android:background="@drawable/profile_text_btn"
+                android:paddingLeft="50dp"
+                android:paddingTop="25dp"
+                android:text="@string/language_setting"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="85dp"
+                android:background="@drawable/profile_text_btn"
+                android:paddingLeft="50dp"
+                android:paddingTop="25dp"
+                android:text="@string/emergency_numbers"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/about_the_app"
+                android:layout_width="350dp"
+                android:layout_height="85dp"
+                android:background="@drawable/profile_text_btn"
+                android:paddingLeft="50dp"
+                android:paddingTop="25dp"
+                android:text="@string/about_app"
+                android:textSize="15dp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -88,6 +118,5 @@
             />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

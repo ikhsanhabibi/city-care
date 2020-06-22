@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.citycare.R;
-import com.example.citycare.model.Complaint;
+import com.example.citycare.model.Form;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,10 +22,10 @@ import java.util.Date;
 public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.ComplaintsViewHolder> {
 
     Activity context;
-    ArrayList<Complaint> complaintsArrayList;
+    ArrayList<Form> complaintsArrayList;
     ImageView picture;
 
-    public ComplaintsAdapter(Activity context, ArrayList<Complaint> complaintsArrayList) {
+    public ComplaintsAdapter(Activity context, ArrayList<Form> complaintsArrayList) {
         this.context = context;
         this.complaintsArrayList = complaintsArrayList;
     }
@@ -40,18 +40,18 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull ComplaintsViewHolder holder, int position) {
-        Complaint complaint = complaintsArrayList.get(position);
-        holder.textViewCategory.setText(complaint.getCategory());
-        holder.textViewStatus.setText(complaint.getStatus());
-        holder.textViewDescription.setText(complaint.getDescription());
-        holder.textViewLocation.setText(complaint.getLocation());
+        Form form = complaintsArrayList.get(position);
+        holder.textViewCategory.setText(form.getCategory());
+        holder.textViewStatus.setText(form.getStatus());
+        holder.textViewDescription.setText(form.getDescription());
+        holder.textViewLocation.setText(form.getLocation());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date(complaint.getTimestamp().getTime());
+        Date date = new Date(form.getTimestamp().getTime());
         String strDate = dateFormat.format(date);
         holder.textViewDate.setText(strDate);
 
-        Glide.with(context).load(complaint.getImageUrl()).into(picture);
+        Glide.with(context).load(form.getImageUrl()).into(picture);
     }
 
     @Override

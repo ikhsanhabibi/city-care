@@ -2,127 +2,72 @@ package com.example.citycare.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
-import com.example.citycare.adapter.ComplaintsAdapter;
 import com.example.citycare.R;
-import com.example.citycare.model.Complaint;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.Date;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ReportsActivity extends AppCompatActivity {
-    private static final String TAG = "TAG";
 
-    RecyclerView recyclerView;
-    FirebaseAuth auth;
-    FirebaseUser firebaseUser;
-    String email;
-    ArrayList<Complaint> complaintsArrayList = new ArrayList<Complaint>();
-    CollectionReference complaints;
-    private ImageView left_btn;
+    private BottomNavigationView bottomNavigationView;
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(ReportsActivity.this, ProfileActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
+    private EditText complaintNumber;
+    private Button find;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
 
-        left_btn = findViewById(R.id.left_btn);
-        left_btn.setOnClickListener(new View.OnClickListener() {
+        complaintNumber = findViewById(R.id.complaint_number);
+
+        find = findViewById(R.id.find);
+
+
+
+
+
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent s = new Intent(ReportsActivity.this, ProfileActivity.class);
-                startActivity(s);
-                finish();
-            }
-        });
-
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        // Firebase
-        auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
-
-        email = firebaseUser.getEmail();
-
-        complaints = FirebaseFirestore.getInstance().collection("complaints");
-
-        fetchAllComplaints();
-    }
-
-
-    private void fetchAllComplaints() {
-        complaintsArrayList.clear();
-        complaints.whereEqualTo("email", email).orderBy("timestamp", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot doc : task.getResult()) {
-                        Complaint data = new Complaint();
-                        String location = doc.getData().get("location").toString();
-                        String category = doc.getData().get("category").toString();
-                        String description = doc.getData().get("description").toString();
-                        String status = doc.getData().get("status").toString();
-
-                        String str = doc.getData().get("timestamp").toString();
-                        String result = str.substring(str.indexOf("=") + 1, str.indexOf(","));
-                        long seconds = Long.parseLong(result, 10);
-                        long millis = seconds * 1000;
-                        Date date = new Date(millis);
-
-                        String imageUrl = doc.getData().get("imageUrl").toString();
-
-                        data.setLocation(location);
-                        data.setCategory(category);
-                        data.setStatus(status);
-                        data.setDescription(description);
-                        data.setTimestamp(date);
-                        data.setImageUrl(imageUrl);
-                        complaintsArrayList.add(data);
-
-                    }
-
-                    ComplaintsAdapter adapter = new ComplaintsAdapter(ReportsActivity.this, complaintsArrayList);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.complaint:
+                        Intent intent1 = new Intent(ReportsActivity.this, ComplaintActivity.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+                    case R.id.reports:
+                        break;
+                    case R.id.faq:
+                        Intent intent3 = new Intent(ReportsActivity.this, FAQActivity.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+                    case R.id.more:
+                        Intent intent4 = new Intent(ReportsActivity.this, MoreActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
                 }
+                return true;
             }
+
         });
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        overridePendingTransition(0, 0);
     }
 }

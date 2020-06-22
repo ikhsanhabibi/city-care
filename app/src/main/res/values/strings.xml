@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">City Care</string>
     <string name="welcome_to">Welcome to</string>
-    <string name="ccs">Citizens complaint service</string>
+    <string name="ccs">Citizens form service</string>
     <string name="get_started">Get started</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
@@ -20,10 +20,10 @@
     <string name="title">Title</string>
     <string name="my_complaints">My Complaints</string>
     <string name="complaints_sent">Complaint is sent!</string>
-    <string name="complaints_success">Your complaint was sent successfully. For more details, check All My Reports page under Profile tab</string>
+    <string name="complaints_success">Your complaint was successfully sent. For more details, check your complaint under "Reports" tab</string>
     <string name="my_suggestions">My Suggestions</string>
     <string name="suggestions_sent">Suggestion is sent!</string>
-    <string name="suggestions_success">Your suggestion was sent successfully. For more details, check All My Reports page under Profile tab</string>
+    <string name="suggestions_success">Your suggestion was successfully sent. For more details, check your suggestion under "Reports" tab</string>
 
     <string name="select_location">Select location</string>
     <string name="upload_picture">Upload picture</string>
@@ -105,11 +105,21 @@
     <string name="notifications">Notifications</string>
     <string name="edit_profile">EDIT PROFILE</string>
     <string name="reports">Reports</string>
-    <string name="important_numbers">Important numbers</string>
+    <string name="emergency_numbers">Emergency numbers</string>
     <string name="language_setting">Language setting</string>
     <string name="log_out">Log out</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
+    <string name="complaint">Complaint</string>
+    <string name="more">More</string>
+    <string name="give">Give a</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="about_app">About the app</string>
+    <string name="find">Find</string>
+    <string name="all_new_complaints">All new complaints</string>
+    <string name="see_all_new_complaints">See all new complaints</string>
+    <string name="find_report">Find report</string>
+    <string name="complaint_number">Complaint number</string>
 
 
 </resources>

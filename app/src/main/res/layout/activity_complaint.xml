@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGrey"
-    tools:context=".activity.HomeActivity">
+    tools:context=".activity.ComplaintActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -23,13 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:src="@drawable/home_logo" />
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/main_logo" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="490dp"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="45dp"
@@ -38,18 +38,62 @@
         android:layout_marginBottom="100dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/complaintText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-black"
+            android:scaleType="fitCenter"
+            android:text="@string/complaint"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/yellow"
+            android:textSize="30dp" />
+
         <ImageView
             android:id="@+id/complaint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginBottom="30dp"
             android:src="@drawable/home_complaint" />
 
         <ImageView
             android:id="@+id/suggestion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/home_suggestion" />
+
+        <TextView
+            android:id="@+id/suggestionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:scaleType="fitCenter"
+            android:text="@string/give"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/green"
+            android:textSize="30dp"
+
+            />
+
+        <TextView
+            android:id="@+id/suggestionText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:paddingBottom="40dp"
+            android:scaleType="fitCenter"
+            android:text="@string/suggestion"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/green"
+            android:textSize="30dp"
+
+            />
+
 
     </LinearLayout>
 

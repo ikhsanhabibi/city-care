@@ -1,10 +1,11 @@
-package com.example.citycare;
+package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.citycare.R;
 import com.example.citycare.activity.ChooseLanguageActivity;
 
 import java.util.Timer;

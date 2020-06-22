@@ -28,20 +28,19 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadLocale();
-        setContentView(R.layout.activity_language_setting);
+        setContentView(R.layout.activity_choose_language);
 
         // One time activity
         SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
-        if (pref.getBoolean("activity_executed", false)) {
-            Intent intent = new Intent(this, Welcome2Activity.class);
+        if (pref.getBoolean("activity_choose_language", false)) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
             finish();
         } else {
             SharedPreferences.Editor ed = pref.edit();
-            ed.putBoolean("activity_executed", true);
+            ed.putBoolean("activity_choose_language", true);
             ed.commit();
         }
-
 
         radioGroup = findViewById(R.id.radioGroup);
         button_apply = findViewById(R.id.apply);
@@ -69,13 +68,14 @@ public class ChooseLanguageActivity extends AppCompatActivity {
 
         if (language.equals("English")) {
             setLocale("en");
-        } else if (language.equals("Deutsch")) {
-            setLocale("de");
         } else if (language.equals("Indonesia")) {
             setLocale("in");
-        } else if (language.equals("Polish")) {
-            setLocale("pl");
+        } else if (language.equals("Javanese")) {
+            setLocale("jv");
+        } else if (language.equals("Sundanese")) {
+            setLocale("su");
         }
+
     }
 
     private void setLocale(String lang) {

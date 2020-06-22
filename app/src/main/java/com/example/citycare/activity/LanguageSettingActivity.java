@@ -1,7 +1,9 @@
 package com.example.citycare.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -24,6 +26,7 @@ public class LanguageSettingActivity extends AppCompatActivity {
     RadioButton radioButton;
     Button button_apply;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,7 @@ public class LanguageSettingActivity extends AppCompatActivity {
 
                 chooseLanguage(radioButton.getText().toString());
 
-                Intent s = new Intent(getApplicationContext(), WelcomeActivity.class);
+                Intent s = new Intent(getApplicationContext(), MoreActivity.class);
                 startActivity(s);
                 finish();
             }
@@ -55,12 +58,12 @@ public class LanguageSettingActivity extends AppCompatActivity {
 
         if (language.equals("English")) {
             setLocale("en");
-        } else if (language.equals("Deutsch")) {
-            setLocale("de");
         } else if (language.equals("Indonesia")) {
             setLocale("in");
-        } else if (language.equals("Polish")) {
-            setLocale("pl");
+        } else if (language.equals("Javanese")) {
+            setLocale("jv");
+        } else if (language.equals("Sundanese")) {
+            setLocale("su");
         }
     }
 
@@ -75,6 +78,7 @@ public class LanguageSettingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("my_language", lang);
         editor.apply();
+
     }
 
     private void loadLocale() {
