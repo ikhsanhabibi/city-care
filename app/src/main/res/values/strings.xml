@@ -120,6 +120,15 @@
     <string name="see_all_new_complaints">See all new complaints</string>
     <string name="find_report">Find report</string>
     <string name="complaint_number">Complaint number</string>
+    <string name="report_details">Report details</string>
+    <string name="reportID">Report number</string>
+    <string name="type">Type</string>
+    <string name="category">Category</string>
+    <string name="location">Location</string>
+    <string name="submitted">Submitted on</string>
+    <string name="status">Status</string>
+    <string name="feedback">Feedback</string>
+    <string name="last_update">Last update</string>
 
 
 </resources>

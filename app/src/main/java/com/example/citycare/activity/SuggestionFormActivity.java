@@ -453,7 +453,7 @@ public class SuggestionFormActivity extends AppCompatActivity {
 
         Form suggestion;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference newComplaintRef = db.collection("complaints").document();
+        DocumentReference newComplaintRef = db.collection("suggestions").document();
 
         suggestion = new Form();
         suggestion.setId(generateRandomID(MAX_LENGTH));
