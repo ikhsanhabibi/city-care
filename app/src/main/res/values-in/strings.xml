@@ -197,4 +197,20 @@
     <string name="about_app">Tentang aplikasi</string>
     <string name="emergency_numbers">Nomor darurat</string>
     <string name="complaint">Keluhan</string>
+    <string name="find">Cari</string>
+    <string name="all_new_complaints">Semua keluhan baru</string>
+    <string name="see_all_new_complaints">Lihat semua keluhan baru</string>
+    <string name="find_report">Cari laporan</string>
+    <string name="complaint_number">Nomor keluhan</string>
+    <string name="report_details">Detail laporan</string>
+    <string name="reportID">Nomor laporan</string>
+    <string name="type">Tipe</string>
+    <string name="category">Kategori</string>
+    <string name="location">Lokasi</string>
+    <string name="submitted">Dikirim pada</string>
+    <string name="status">Status</string>
+    <string name="feedback">Catatan</string>
+    <string name="last_update">Terakhir diperbarui</string>
+    <string name="reports_number">Nomor laporan</string>
+    <string name="report_not_found">Maaf, laporan Anda tidak dapat ditemukan. Harap coba lagi dengan nomor laporan yang benar.</string>
 </resources>

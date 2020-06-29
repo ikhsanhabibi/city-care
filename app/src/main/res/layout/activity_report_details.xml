@@ -22,6 +22,14 @@
 
 
     <ImageView
+        android:id="@+id/left_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_chevron_left_black_24dp" />
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
@@ -276,7 +284,7 @@
                     android:id="@+id/last_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="last update"
+                    android:text="Last update"
                     android:textAlignment="textEnd"
                     android:textColor="@color/grey"
                     android:textSize="18dp" />
