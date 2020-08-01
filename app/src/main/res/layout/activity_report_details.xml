@@ -46,32 +46,33 @@
             android:id="@+id/report_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="79dp"
+            android:layout_marginTop="80dp"
             android:layout_marginBottom="30dp"
             android:fontFamily="sans-serif-black"
             android:scaleType="fitCenter"
             android:text="@string/report_details"
             android:textAlignment="center"
             android:textColor="#515C6F"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginBottom="25dp"
                 android:background="@drawable/form_round_btn"
                 android:gravity="top"
                 android:orientation="vertical"
-                android:padding="40dp"
-                android:textColor="@color/grey">
+                android:padding="25dp"
+                android:textColor="@color/grey"
+                >
 
 
                 <LinearLayout
@@ -81,11 +82,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/reportID"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/reportID"
@@ -93,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/reportID"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -105,11 +106,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/type"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     >
 
@@ -119,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/type"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -131,11 +132,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/category"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/category"
@@ -143,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/category"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -155,11 +156,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/location"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/location"
@@ -167,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/location"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -178,26 +179,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/description"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
 
-                    <ScrollView
+                    <TextView
+                        android:id="@+id/description"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
+                        android:textColor="@color/grey"
+                        android:textSize="15sp" />
 
-                        <TextView
-                            android:id="@+id/description"
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:text="@string/description"
-                            android:textColor="@color/grey"
-                            android:textSize="18dp" />
-                    </ScrollView>
 
                 </LinearLayout>
 
@@ -209,11 +205,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/submitted"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/submitted"
@@ -221,7 +217,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/submitted"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -233,11 +229,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/status"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/status"
@@ -245,7 +241,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/status"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -257,26 +253,23 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:text="@string/feedback"
                         android:textColor="@color/grey"
-                        android:textSize="18dp" />
+                        android:textSize="15sp" />
 
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:orientation="vertical">
+
 
                         <TextView
                             android:id="@+id/feedback"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:text="@string/feedback"
                             android:textColor="@color/grey"
-                            android:textSize="18dp" />
-                    </ScrollView>
+                            android:textSize="15sp" />
+
 
                 </LinearLayout>
 
@@ -287,7 +280,7 @@
                     android:text="Last update"
                     android:textAlignment="textEnd"
                     android:textColor="@color/grey"
-                    android:textSize="18dp" />
+                    android:textSize="15sp" />
 
 
             </LinearLayout>

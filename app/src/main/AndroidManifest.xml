@@ -22,12 +22,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/city_care"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/city_care"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ReportDetailsActivity"></activity>
+        <activity android:name=".activity.EmergencyNumberActivity"></activity>
+        <activity android:name=".activity.AboutAppActivity" />
+        <activity android:name=".activity.AllNewComplaintsActivity" />
+        <activity android:name=".activity.ReportDetailsActivity" />
         <activity android:name=".activity.ComplaintActivity" />
         <activity android:name=".activity.MoreActivity" />
         <activity android:name=".activity.ReportsActivity" />

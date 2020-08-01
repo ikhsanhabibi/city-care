@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MoreActivity"
     android:background="@color/lightGrey"
-    >
+    tools:context=".activity.MoreActivity">
 
 
     <ImageView
@@ -47,56 +46,99 @@
             android:scaleType="fitCenter"
             android:text="@string/more"
             android:textAlignment="center"
-            android:textColor="#515C6F"
-            android:textSize="25dp" />
+            android:textColor="@color/grey"
+            android:textSize="25sp" />
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            android:layout_marginRight="25dp"
+            android:background="@drawable/form_round_btn"
+            android:orientation="vertical"
+            android:padding="5dp"
+
+            >
 
             <TextView
                 android:id="@+id/languageSetting"
-                android:layout_width="350dp"
-                android:layout_height="85dp"
-                android:background="@drawable/profile_text_btn"
-                android:paddingLeft="50dp"
-                android:paddingTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
                 android:text="@string/language_setting"
-                android:textSize="15dp" />
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/lightGrey" />
 
 
             <TextView
-                android:layout_width="350dp"
-                android:layout_height="85dp"
-                android:background="@drawable/profile_text_btn"
-                android:paddingLeft="50dp"
-                android:paddingTop="25dp"
+                android:id="@+id/emergency_numbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
                 android:text="@string/emergency_numbers"
-                android:textSize="15dp" />
+                android:textColor="@color/grey"
+                android:textSize="15sp"
 
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/lightGrey" />
 
             <TextView
                 android:id="@+id/about_the_app"
-                android:layout_width="350dp"
-                android:layout_height="85dp"
-                android:background="@drawable/profile_text_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
                 android:paddingLeft="50dp"
                 android:paddingTop="25dp"
                 android:text="@string/about_app"
-                android:textSize="15dp" />
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
 
 
         </LinearLayout>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:scaleType="fitCenter"
+            android:text="@string/version"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.NavigationActivity">

@@ -51,6 +51,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class SuggestionFormActivity extends AppCompatActivity {
     private static final int MAX_LENGTH = 10;
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
+
     private Uri imgUri;
     private String downloadUrl;
     private TextView select_location, upload_picture;
@@ -169,12 +171,11 @@ public class SuggestionFormActivity extends AppCompatActivity {
         categories.add(getResources().getString(R.string.road));
         categories.add(getResources().getString(R.string.side_walk));
         categories.add(getResources().getString(R.string.traffic_sign));
-        categories.add(getResources().getString(R.string.tunnel));
         categories.add(getResources().getString(R.string.train));
         categories.add(getResources().getString(R.string.tram));
+        categories.add(getResources().getString(R.string.tunnel));
         categories.add(getResources().getString(R.string.waterway));
         categories.add(getResources().getString(R.string.other));
-
 
         // Style and populate the spinner
         ArrayAdapter<String> dataAdapter;
@@ -353,32 +354,39 @@ public class SuggestionFormActivity extends AppCompatActivity {
         final StorageReference mRef = storageReference.child("image_" + System.currentTimeMillis() + ".jpg");
 
         // Image Compression
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-        final byte[] data = baos.toByteArray();
-        UploadTask uploadTask = mRef.putFile(imgUri);
+        if (bitmap != null) {
 
-        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+            final byte[] data = baos.toByteArray();
+            UploadTask uploadTask = mRef.putFile(imgUri);
+
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    // Continue with the task to get the download URL
+                    mRef.putBytes(data);
+                    return mRef.getDownloadUrl();
                 }
-                // Continue with the task to get the download URL
-                mRef.putBytes(data);
-                return mRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    String uri = task.getResult().toString();
-                    setDownloadUrl(uri);
-                } else {
-                    // Handle failures
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        String uri = task.getResult().toString();
+                        setDownloadUrl(uri);
+                    } else {
+                        // Handle failures
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            Intent newIntent = new Intent(this, ComplaintFormActivity.class);
+            startActivity(newIntent);
+            finish();
+        }
 
 
     }
@@ -414,13 +422,37 @@ public class SuggestionFormActivity extends AppCompatActivity {
             String[] bits = imgPath.split("/");
             String pictureName = bits[bits.length - 1];
 
+            // Check image size
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imgUri);
-            } catch (IOException e) {
+                BitmapFactory.decodeStream(
+                        context.getContentResolver().openInputStream(imgUri),
+                        null,
+                        options);
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            int imageHeight = options.outHeight;
+            int imageWidth = options.outWidth;
 
-            upload_picture.setText(pictureName);
+
+            if (imageHeight > 1920 || imageWidth > 1920) {
+                upload_picture.setText(R.string.upload_picture);
+                Toast.makeText(SuggestionFormActivity.this, getResources().getString(R.string.image_too_large), Toast.LENGTH_SHORT).show();
+                return;
+
+            } else {
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imgUri);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                upload_picture.setText(pictureName);
+            }
+
             ImageUpload(imgUri, bitmap);
 
         } else if (requestCode == PICK_IMAGE_CAMERA) {
@@ -451,7 +483,7 @@ public class SuggestionFormActivity extends AppCompatActivity {
         // Saved Preferences
         restoreLastValue();
 
-        Form suggestion;
+        final Form suggestion;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference newComplaintRef = db.collection("suggestions").document();
 
@@ -471,8 +503,12 @@ public class SuggestionFormActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 progress_bar.setVisibility(View.GONE);
-                startActivity(new Intent(getApplicationContext(), SuggestionSentActivity.class));
+
+                Intent s = new Intent(getApplicationContext(), SuggestionSentActivity.class);
+                s.putExtra("id", suggestion.getId());
+                startActivity(s);
                 finish();
+
                 clearForm();
                 Log.d(TAG, "Complaint sent.");
             }
@@ -496,7 +532,7 @@ public class SuggestionFormActivity extends AppCompatActivity {
             longitude = (float) getIntent().getDoubleExtra("longitude", 0);
         }
 
-        if (stringCategory == getResources().getString(R.string.choose_category) || stringCategory.isEmpty()) {
+        if (stringCategory.equals(getResources().getString(R.string.choose_category)) || stringCategory.isEmpty()) {
             spinner.requestFocus();
             Toast.makeText(SuggestionFormActivity.this, getResources().getString(R.string.choose_category_please), Toast.LENGTH_SHORT).show();
             return;

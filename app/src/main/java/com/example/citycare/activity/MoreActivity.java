@@ -14,8 +14,8 @@ import com.example.citycare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MoreActivity extends AppCompatActivity {
+    TextView languageSetting, emergencyNumbers, aboutApp;
     private BottomNavigationView bottomNavigationView;
-    TextView  language_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,8 @@ public class MoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more);
 
 
-
-
-
-        language_setting = findViewById(R.id.languageSetting);
-        language_setting.setOnClickListener(new View.OnClickListener() {
+        languageSetting = findViewById(R.id.languageSetting);
+        languageSetting.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -36,10 +33,25 @@ public class MoreActivity extends AppCompatActivity {
             }
         });
 
+        emergencyNumbers = findViewById(R.id.emergency_numbers);
+        emergencyNumbers.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MoreActivity.this, EmergencyNumberActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        aboutApp = findViewById(R.id.about_the_app);
+        aboutApp.setOnClickListener(new View.OnClickListener() {
 
-
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MoreActivity.this, AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         bottomNavigationView = findViewById(R.id.bottom_nav);

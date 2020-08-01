@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -68,7 +69,7 @@ public class MapActivity extends AppCompatActivity {
     private GpsMyLocationProvider provider;
     private Overlay touchOverlay;
     private Button set_location;
-    private TextView address;
+    private EditText address;
 
     @Override
     public void onBackPressed() {
@@ -111,14 +112,14 @@ public class MapActivity extends AppCompatActivity {
                 String previousActivity = intent.getStringExtra("FROM_ACTIVITY");
                 if (previousActivity.equals("COMPLAINT")) {
                     Intent c = new Intent(getApplicationContext(), ComplaintFormActivity.class);
-                    c.putExtra("address", address.getText());
+                    c.putExtra("address", address.getText().toString());
                     c.putExtra("latitude", latitude);
                     c.putExtra("longitude", longitude);
                     startActivity(c);
                     finish();
                 } else {
                     Intent s = new Intent(getApplicationContext(), SuggestionFormActivity.class);
-                    s.putExtra("address", address.getText());
+                    s.putExtra("address", address.getText().toString());
                     s.putExtra("latitude", latitude);
                     s.putExtra("longitude", longitude);
                     startActivity(s);
@@ -309,9 +310,18 @@ public class MapActivity extends AppCompatActivity {
                 latitude = pMapView.getMapCenter().getLatitude();
                 longitude = pMapView.getMapCenter().getLongitude();
 
-                if (myLocationNewOverlay != null) {
+                if (myLocationNewOverlay == null) {
                     pMapView.getOverlays().remove(anotherItemizedIconOverlay);
                     map.getOverlays().remove(myLocationNewOverlay);
+
+
+                    secondMarker.setIcon(icon);
+                    secondMarker.setPosition(new GeoPoint((float) latitude,
+                            (float) longitude));
+
+                } else if (anotherItemizedIconOverlay != null && myLocationNewOverlay != null) {
+                    map.getOverlays().remove(myLocationNewOverlay);
+                    pMapView.getOverlays().remove(anotherItemizedIconOverlay);
                     map.getOverlays().add(secondMarker);
 
                     secondMarker.setIcon(icon);

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ReportsActivity"
     android:background="@color/lightGrey"
-    >
+    tools:context=".activity.ReportsActivity">
 
 
     <ImageView
@@ -31,99 +30,113 @@
         android:src="@drawable/main_logo" />
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="57dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/faq"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="79dp"
-            android:layout_marginBottom="50dp"
-            android:fontFamily="sans-serif-black"
-            android:scaleType="fitCenter"
-            android:text="@string/reports"
-            android:textAlignment="center"
-            android:textColor="#515C6F"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/find_report"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:text="@string/find_report"
-            android:textAlignment="center"
-            android:textColor="#515C6F"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/complaint_number"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="20dp"
-            android:autofillHints="description"
-            android:background="@drawable/form_round_btn"
-            android:gravity="top"
-            android:hint="@string/reports_number"
-            android:inputType="text"
-            android:padding="20dp"
-            android:textColor="@color/grey" />
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
-        <Button
-            android:id="@+id/find"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/green_button"
-            android:text="@string/find"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/reports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="sans-serif-black"
+                android:scaleType="fitCenter"
+                android:text="@string/reports"
+                android:textAlignment="center"
+                android:textColor="#515C6F"
+                android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/report_not_found"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:text="@string/report_not_found"
-            android:textAlignment="center"
-            android:textColor="#DC143C"
-            android:textSize="15dp"
-            android:layout_marginBottom="100dp"/>
+            <TextView
+                android:id="@+id/find_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:text="@string/find_report"
+                android:textAlignment="center"
+                android:textColor="#515C6F"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/complaint_number"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:autofillHints="description"
+                android:background="@drawable/form_round_btn"
+                android:gravity="top"
+                android:hint="@string/reports_number"
+                android:inputType="text"
+                android:padding="20dp"
+                android:textColor="@color/grey" />
+
+            <Button
+                android:id="@+id/find"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/green_button"
+                android:text="@string/find"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/report_not_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:text="@string/report_not_found"
+                android:textAlignment="center"
+                android:textColor="#DC143C"
+                android:textSize="15sp" />
 
 
-        <TextView
-            android:id="@+id/see_all_new_complaints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:text="@string/see_all_new_complaints"
-            android:textAlignment="center"
-            android:textColor="#515C6F"
-            android:textSize="15dp" />
+            <TextView
+                android:id="@+id/see_all_new_complaints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:text="@string/see_all_new_complaints"
+                android:textAlignment="center"
+                android:textColor="#515C6F"
+                android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/all_new_complaints"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/yellow_button"
-            android:text="@string/all_new_complaints"
-            android:textColor="@color/white" />
+            <Button
+                android:id="@+id/all_new_complaints"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/yellow_button"
+                android:text="@string/all_new_complaints"
+                android:textColor="@color/white" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
     <ProgressBar
@@ -135,8 +148,7 @@
         android:layout_gravity="center" />
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.NavigationActivity">

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -52,6 +56,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,7 +64,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 
 public class ComplaintFormActivity extends AppCompatActivity {
@@ -172,13 +176,12 @@ public class ComplaintFormActivity extends AppCompatActivity {
         categories.add(getResources().getString(R.string.road));
         categories.add(getResources().getString(R.string.side_walk));
         categories.add(getResources().getString(R.string.traffic_sign));
-        categories.add(getResources().getString(R.string.tunnel));
         categories.add(getResources().getString(R.string.train));
         categories.add(getResources().getString(R.string.tram));
+        categories.add(getResources().getString(R.string.tunnel));
         categories.add(getResources().getString(R.string.waterway));
         categories.add(getResources().getString(R.string.other));
 
-        Collections.sort(categories);
 
         // Style and populate the spinner
         ArrayAdapter<String> dataAdapter;
@@ -335,9 +338,9 @@ public class ComplaintFormActivity extends AppCompatActivity {
         String imageFileName = "image_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
+                imageFileName,          /* prefix */
                 ".jpg",         /* suffix */
-                storageDir      /* directory */
+                storageDir            /* directory */
         );
 
         // Save a file: path for use with ACTION_VIEW intents
@@ -357,32 +360,39 @@ public class ComplaintFormActivity extends AppCompatActivity {
         final StorageReference mRef = storageReference.child("image_" + System.currentTimeMillis() + ".jpg");
 
         // Image Compression
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-        final byte[] data = baos.toByteArray();
-        UploadTask uploadTask = mRef.putFile(imgUri);
+        if (bitmap != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+            final byte[] data = baos.toByteArray();
+            UploadTask uploadTask = mRef.putFile(imgUri);
 
-        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    // Continue with the task to get the download URL
+                    mRef.putBytes(data);
+                    return mRef.getDownloadUrl();
                 }
-                // Continue with the task to get the download URL
-                mRef.putBytes(data);
-                return mRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    String uri = task.getResult().toString();
-                    setDownloadUrl(uri);
-                } else {
-                    // Handle failures
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        String uri = task.getResult().toString();
+                        setDownloadUrl(uri);
+                    } else {
+                        // Handle failures
+                    }
                 }
-            }
-        });
+            });
+
+        } else {
+            Intent newIntent = new Intent(this, ComplaintFormActivity.class);
+            startActivity(newIntent);
+            finish();
+        }
 
 
     }
@@ -418,13 +428,37 @@ public class ComplaintFormActivity extends AppCompatActivity {
             String[] bits = imgPath.split("/");
             String pictureName = bits[bits.length - 1];
 
+            // Check image size
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imgUri);
-            } catch (IOException e) {
+                BitmapFactory.decodeStream(
+                        context.getContentResolver().openInputStream(imgUri),
+                        null,
+                        options);
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            int imageHeight = options.outHeight;
+            int imageWidth = options.outWidth;
 
-            upload_picture.setText(pictureName);
+
+            if (imageHeight > 1920 || imageWidth > 1920) {
+                upload_picture.setText(R.string.upload_picture);
+                Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.image_too_large), Toast.LENGTH_SHORT).show();
+                return;
+
+            } else {
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imgUri);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                upload_picture.setText(pictureName);
+            }
+
             ImageUpload(imgUri, bitmap);
 
         } else if (requestCode == PICK_IMAGE_CAMERA) {
@@ -455,7 +489,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
         // Saved Preferences
         restoreLastValue();
 
-        Form complaint;
+        final Form complaint;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference newComplaintRef = db.collection("complaints").document();
 
@@ -467,7 +501,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
         complaint.setLatitude(latitude);
         complaint.setLongitude(longitude);
         complaint.setType(getResources().getString(R.string.complaint_type));
-        complaint.setStatus(getResources().getString(R.string.sent));
+        complaint.setStatus("SENT");
         complaint.setImageUrl(downloadUrl);
         complaint.setFeedback("-");
 
@@ -475,8 +509,12 @@ public class ComplaintFormActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 progress_bar.setVisibility(View.GONE);
-                startActivity(new Intent(getApplicationContext(), ComplaintSentActivity.class));
+
+                Intent s = new Intent(getApplicationContext(), ComplaintSentActivity.class);
+                s.putExtra("id", complaint.getId());
+                startActivity(s);
                 finish();
+
                 clearForm();
                 Log.d(TAG, "Complaint sent.");
             }
@@ -500,7 +538,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
             longitude = (float) getIntent().getDoubleExtra("longitude", 0);
         }
 
-        if (stringCategory == getResources().getString(R.string.choose_category) || stringCategory.isEmpty()) {
+        if (stringCategory.equals( getResources().getString(R.string.choose_category)) || stringCategory.isEmpty()) {
             spinner.requestFocus();
             Toast.makeText(ComplaintFormActivity.this, getResources().getString(R.string.choose_category_please), Toast.LENGTH_SHORT).show();
             return;
@@ -575,6 +613,7 @@ public class ComplaintFormActivity extends AppCompatActivity {
         SavePreferences("latitude", String.valueOf(this.latitude));
         SavePreferences("longitude", String.valueOf(this.longitude));
     }
+
 
     private void SavePreferences(String key, String value) {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);

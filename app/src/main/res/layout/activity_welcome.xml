@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/signin_signup_bg"
-    tools:context=".activity.WelcomeActivity">
+    android:background="@drawable/main_bg"
+    tools:context=".activity.WelcomeActivity"
+    android:alpha="0.8"
+    >
 
     <LinearLayout
-        android:layout_width="796dp"
-        android:layout_height="547dp"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="100dp"
         android:layout_marginRight="45dp"
-        android:layout_marginBottom="296dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -35,7 +32,7 @@
             android:id="@+id/ccs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ccs"
+            android:text="@string/city_care"
             android:textAlignment="center"
             android:textColor="#009F50"
             android:textSize="15pt"
@@ -73,8 +70,8 @@
             android:background="@drawable/green_button"
             android:text="@string/continue_btn"
             android:textColor="#FFF"
-            android:textStyle="bold"></Button>
-        >
+            android:textStyle="bold"/>
+
 
     </LinearLayout>
 

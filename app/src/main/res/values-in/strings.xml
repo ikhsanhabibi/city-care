@@ -4,13 +4,7 @@
 
     <string name="welcome_to">Selamat Datang di</string>
 
-    <string name="ccs">Layanan pengaduan warga</string>
-
     <string name="get_started">Memulai</string>
-
-    <string name="sign_up">Daftar</string>
-
-    <string name="sign_in">Masuk</string>
 
     <string name="report_it">Laporkan, kami akan menanganinya!</string>
 
@@ -20,13 +14,7 @@
 
     <string name="continue_btn">Teruskan</string>
 
-    <string name="forgot_password">Tidak ingat kata sandi?</string>
-
     <string name="or">atau</string>
-
-    <string name="google_btn">Masuk dengan Google</string>
-
-    <string name="fb_btn">Masuk dengan Facebook</string>
 
     <string name="name">Nama</string>
 
@@ -50,7 +38,7 @@
 
     <string name="select_location">Pilih lokasi</string>
 
-    <string name="upload_picture">Mengunggah gambar</string>
+    <string name="upload_picture">Unggah gambar</string>
 
     <string name="choose_category">Pilih Kategori</string>
 
@@ -60,11 +48,11 @@
 
     <string name="sent">DIKIRIM</string>
 
-    <string name="in_progress">SEDANG BERLANGSUNG</string>
+    <string name="in_progress">SEDANG DIKERJAKAN</string>
 
-    <string name="done">DIBUAT</string>
+    <string name="done">SELESAI</string>
 
-    <string name="review">DITINJAU</string>
+    <string name="reviewed">SEDANG DITINJAU</string>
 
     <string name="take_photo">Mengambil gambar</string>
 
@@ -74,7 +62,7 @@
 
     <string name="select_option">Pilih opsi</string>
 
-    <string name="select_image_please">Tolong pilih gambar!</string>
+    <string name="select_image_please">Mohon pilih gambar!</string>
 
     <string name="permission_necessary">Izin diperlukan!</string>
 
@@ -84,11 +72,11 @@
 
     <string name="choose_category_please">Silakan pilih kategori!</string>
 
-    <string name="write_something">Tolong tulis sesuatu!</string>
+    <string name="write_something">Mohon tulis sesuatu!</string>
 
-    <string name="pick_picture">Silakan pilih gambar!</string>
+    <string name="pick_picture">Mohon pilih gambar!</string>
 
-    <string name="choose_location">Tolong pilih lokasi!</string>
+    <string name="choose_location">Mohon pilih lokasi!</string>
 
     <string name="road">Jalan</string>
 
@@ -134,43 +122,13 @@
 
     <string name="no">Tidak</string>
 
-    <string name="login_succesful">Berhasil masuk.</string>
-
-    <string name="logout_succesful">Berhasil keluar.</string>
-
-    <string name="fields_empty">Data kosong!</string>
-
-    <string name="enter_email">Masukkan email Anda!</string>
-
-    <string name="enter_valid_email">Tolong masukkan email yang benar!</string>
-
-    <string name="enter_password">Silakan masukkan kata sandi Anda!</string>
-
-    <string name="login_error">Kesalahan login, silakan masuk lagi!</string>
-
     <string name="error_occured">Terjadi kesalahan!</string>
-
-    <string name="name_required">Nama harus diisi!</string>
-
-    <string name="email_required">Diperlukan email!</string>
-
-    <string name="password_required">Kata kunci dibutuhkan!</string>
-
-    <string name="min_password">Panjang minimum kata sandi harus 6!</string>
-
-    <string name="user_exists">Pengguna sudah ada!</string>
-
-    <string name="creating_user">Menciptakan pengguna baru ...</string>
-
-    <string name="register_succesful">Pengguna berhasil mendaftar.</string>
 
     <string name="selected_language">Bahasa yang dipilih:</string>
 
     <string name="your_complaint_about">Keluhan Anda tentang</string>
 
     <string name="in">di</string>
-
-    <string name="new_status">telah diperbarui. Status baru adalah</string>
 
     <string name="faq">Bantuan</string>
 
@@ -180,13 +138,9 @@
 
     <string name="notifications">Notifikasi</string>
 
-    <string name="edit_profile">ATUR PROFIL</string>
-
     <string name="reports">Laporan</string>
 
     <string name="language_setting">Pengaturan bahasa</string>
-
-    <string name="log_out">Keluar</string>
 
     <string name="home">Beranda</string>
 
@@ -213,4 +167,19 @@
     <string name="last_update">Terakhir diperbarui</string>
     <string name="reports_number">Nomor laporan</string>
     <string name="report_not_found">Maaf, laporan Anda tidak dapat ditemukan. Harap coba lagi dengan nomor laporan yang benar.</string>
+    <string name="complaint_nr">Nomor keluhan:</string>
+    <string name="suggestion_nr">Nomor saran:</string>
+    <string name="suggestion_number">Nomor saran</string>
+    <string name="city_care">City Care</string>
+    <string name="how_to_submit_complaint">Bagaimana cara mengirimkan keluhan?</string>
+    <string name="how_to_retrieve_complaint">Bagaimana cara melihat laporan keluhan saya?</string>
+    <string name="how_to_change_the_language">Bagaimana cara mengganti bahasa?</string>
+    <string name="version">City Care Android v1.0.0</string>
+    <string name="about_the_app_desc">"City care adalah sistem pelayanan untuk pengaduan dan layanan aspirasi online rakyat. Sekarang semua warga setempat dapat menyampaikan pengaduan mengenai segala  kerusakan infrastruktur dengan mudah, terpadu dan tuntas. City Care dikembangkan oleh pemerintah dalam rangka meningkatkan partisipasi masyarakat untuk pengawasan tata kota dan kinerja pemerintah dalam penyelenggaraan pembangunan dan pelayanan publik. "</string>
+    <string name="police">Polisi</string>
+    <string name="ambulance">Ambulan</string>
+    <string name="pln">PLN</string>
+    <string name="firefighter">Pemadam kebakaran</string>
+    <string name="image_too_large">Ukuran gambar terlalu besar. Silakan pilih gambar lain!</string>
+
 </resources>

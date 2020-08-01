@@ -1,4 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">City Care</string>
+    <string name="welcome_to">Wilujeng sumping</string>
+    <string name="get_started">Mimitian</string>
+    <string name="report_it">Laporan éta, urang bakal nanganan!</string>
+    <string name="email_address">Alamat email</string>
+    <string name="password">Kecap aksés</string>
+    <string name="continue_btn">Teruskeun</string>
+    <string name="or">atanapi</string>
+
+    <string name="name">Ngaran</string>
+    <string name="send">Ngirim</string>
+    <string name="description">Katerangan</string>
+    <string name="title">Judul</string>
+    <string name="my_complaints">Keluhan abdi</string>
+    <string name="complaints_sent">Keluhan dikirim!</string>
+    <string name="complaints_success">Keluhan anjeun suksés dikirim. Pikeun langkung rinci, pariksa keluhan anjeun dina tab Laporan</string>
+    <string name="my_suggestions">Saran kuring</string>
+    <string name="suggestions_sent">Saran dikirim!</string>
+    <string name="suggestions_success">Saran anjeun suksés dikirim. Pikeun langkung rinci, pariksa saran anjeun dina tab Laporan</string>
+
+    <string name="select_location">Pilih cicingan</string>
+    <string name="upload_picture">Unggah gambar</string>
+    <string name="choose_category">Pilih kategori</string>
+
+    <string name="complaint_type">TAMPILAN</string>
+    <string name="suggestion_type">SUKTULUN</string>
+
+    <string name="sent">HENTEU</string>
+    <string name="in_progress">NUJU PROSÉS</string>
+    <string name="done">RÉNGSÉ</string>
+    <string name="reviewed">DITIPA</string>
+
+    <string name="take_photo">Candak Poto</string>
+    <string name="choose_from_gallery">Pilih Ti Galeri</string>
+    <string name="cancel">Ngabolaykeun</string>
+    <string name="select_option">Pilih pilihan</string>
+
+    <string name="select_image_please">Pilih gambar punten!</string>
+    <string name="permission_necessary">Idin anu diperlukeun!</string>
+    <string name="camera_necessary">Kaméra dipikabutuh!</string>
+    <string name="storage_necessary">Perlu neundeun pisan perlu!</string>
+
+    <string name="choose_category_please">Milih kategori punten!</string>
+    <string name="write_something">Tulis hiji hal punten!</string>
+    <string name="pick_picture">Nyokot gambar punten!</string>
+    <string name="choose_location">Pilih lokasi punten!</string>
+
+    <string name="road">Jalan</string>
+    <string name="park">Taman</string>
+    <string name="bridge">Sasak</string>
+    <string name="side_walk">Sisi leumpang</string>
+    <string name="field">Sawah</string>
+    <string name="bike_lane">Jalur Sapédah</string>
+    <string name="tunnel">Torowongan</string>
+    <string name="parking_area">Area parkir</string>
+    <string name="traffic_sign">Tanda lalulintas</string>
+    <string name="bus">Beus</string>
+    <string name="train">Ngalatih</string>
+    <string name="tram">Trem</string>
+    <string name="waterway">Jalan cai</string>
+    <string name="canal">Terusan</string>
+    <string name="port">Plabuhan</string>
+    <string name="airport">Bandara</string>
+    <string name="other">Anu séjén</string>
+
+    <string name="finding_location">Nyungsi lokasi ...</string>
+    <string name="set_location">Atur lokasi</string>
+    <string name="enable_gps">Ngahurungkeun GPS?</string>
+    <string name="yes">Leres</string>
+    <string name="no">Henteu</string>
+
+    <string name="error_occured">Kasalahan lumangsung!</string>
+
+
+    <string name="selected_language">Basa nu Dipilih:</string>
+    <string name="your_complaint_about">Keluhan anjeun ngeunaan</string>
+    <string name="in">di</string>
+
+    <string name="faq">Patarosan sering naros</string>
+    <string name="choose_your_language">Pilih basa anjeun</string>
+    <string name="apply">APPLY</string>
+    <string name="notifications">Bewara</string>
+    <string name="reports">Laporan</string>
+    <string name="emergency_numbers">Nomer darurat</string>
+    <string name="language_setting">Setelan basa</string>
+    <string name="home">Imah</string>
+    <string name="account">Akun</string>
+    <string name="complaint">Keluhan</string>
+    <string name="more">Tambih deui</string>
+    <string name="give">Pasihan</string>
+    <string name="suggestion">Saran</string>
+    <string name="about_app">Ngeunaan aplikasi</string>
+    <string name="find">Manggih</string>
+    <string name="all_new_complaints">Sagala keluhan anyar</string>
+    <string name="see_all_new_complaints">Tingali sadaya keluhan anyar</string>
+    <string name="find_report">Milarian laporan</string>
+    <string name="complaint_number">Nomer aduan</string>
+    <string name="complaint_nr">Nomer aduan:</string>
+    <string name="report_details">Laporkeun rinci</string>
+    <string name="reportID">Nomer laporan</string>
+    <string name="type">Jenis</string>
+    <string name="category">Kategori</string>
+    <string name="location">Lokasi</string>
+    <string name="submitted">Dikintunkeun</string>
+    <string name="status">Status</string>
+    <string name="feedback">Eupan balik</string>
+    <string name="last_update">Update pangahirna</string>
+    <string name="reports_number">Nomer laporan</string>
+    <string name="report_not_found">Hapunten, laporan anjeun teu tiasa dipendakan. Cobian deui nganggo nomer laporan anu leres.</string>
+    <string name="suggestion_nr">Nomer Saran:</string>
+    <string name="suggestion_number">Nomer saran</string>
+    <string name="city_care">City Care</string>
+    <string name="how_to_submit_complaint">" 24/5000 Kumaha ngalebetkeun keluhan?"</string>
+    <string name="how_to_retrieve_complaint">Kumaha ningali keluhan kuring?</string>
+    <string name="how_to_change_the_language">Kumaha cara ngarobah basa?</string>
+    <string name="version">City Care Android v1.0.0</string>
+
+
+    <string name="about_the_app_desc">Kota perawatan mangrupikeun sistem jasa pikeun jalma keluhan sareng jasa aspirasional online. Ayeuna sadayana warga tiasa ngalebetkeun keluhan ngeunaan naon anu ngarusak infrastruktur gampang, terintegrasi, sareng lengkep. Kota Penjagaan dikembangkeun ku pamaréntah pikeun ningkatkeun partisipasi masarakat dina pangawasan tata kota sareng prestasi pamaréntahan dina pangwangunan infrastruktur umum.</string>
+    <string name="police">Pulisi</string>
+    <string name="ambulance">Ambulan</string>
+    <string name="pln">Jurusan Listrik Nagara</string>
+    <string name="firefighter">Petugas pemadam kebakaran</string>
+    <string name="image_too_large">Ukuran gambarna ageung teuing. Mangga pilih gambar anu sanés!</string>
+
+
 </resources>

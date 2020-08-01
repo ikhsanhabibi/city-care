@@ -35,7 +35,7 @@ public class ReportsActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private EditText complaintNumber;
-    private Button find;
+    private Button find, allNewComplaints;
     private Form report = new Form();
     private boolean isEmpty;
     private ProgressBar progress_bar;
@@ -61,6 +61,24 @@ public class ReportsActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         findComplaint();
+                    }
+                }, 1000);
+
+            }
+        });
+
+        allNewComplaints = findViewById(R.id.all_new_complaints);
+        allNewComplaints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progress_bar.setVisibility(View.VISIBLE);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        Intent s = new Intent(ReportsActivity.this, AllNewComplaintsActivity.class);
+                        startActivity(s);
+                        finish();
                     }
                 }, 1000);
 
@@ -114,7 +132,7 @@ public class ReportsActivity extends AppCompatActivity {
     void findComplaint() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("complaints")
-                .whereEqualTo("id", complaintNumber.getText().toString())
+                .whereEqualTo("id", complaintNumber.getText().toString().trim())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -210,5 +228,6 @@ public class ReportsActivity extends AppCompatActivity {
 
         progress_bar.setVisibility(View.GONE);
     }
+
 
 }

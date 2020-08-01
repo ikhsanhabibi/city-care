@@ -23,7 +23,7 @@ import java.util.Locale;
 public class LanguageSettingActivity extends AppCompatActivity {
 
     RadioGroup radioGroup;
-    RadioButton radioButton;
+    RadioButton radioButton, enRadioButton, inRadioButton, jvRadioButton, suRadioButton;
     Button button_apply;
 
 

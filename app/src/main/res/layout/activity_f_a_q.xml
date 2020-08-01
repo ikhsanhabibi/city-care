@@ -7,6 +7,7 @@
     android:background="@color/lightGrey"
     tools:context=".activity.FAQActivity">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -40,18 +41,93 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="79dp"
+            android:layout_marginTop="80dp"
             android:fontFamily="sans-serif-black"
             android:scaleType="fitCenter"
             android:text="@string/faq"
             android:textAlignment="center"
-            android:textColor="#515C6F"
-            android:textSize="25dp" />
+            android:textColor="@color/grey"
+            android:textSize="25sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/form_round_btn"
+            android:orientation="vertical"
+            android:padding="5dp"
+
+            >
+
+            <TextView
+                android:id="@+id/how_to_submit_complaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
+                android:text="@string/how_to_submit_complaint"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/lightGrey" />
+
+
+            <TextView
+                android:id="@+id/how_to_retrieve_complaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
+                android:text="@string/how_to_retrieve_complaint"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/lightGrey" />
+
+            <TextView
+                android:id="@+id/how_to_change_the_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center|left"
+                android:padding="15dp"
+                android:paddingLeft="50dp"
+                android:paddingTop="25dp"
+                android:text="@string/how_to_change_the_language"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.NavigationActivity">

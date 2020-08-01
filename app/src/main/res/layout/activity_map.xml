@@ -6,7 +6,6 @@
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
-        tilesource="Mapnik"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -44,18 +43,20 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="@string/select_location"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_place_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left"
-            android:padding="15dp"
-            android:text="@string/finding_location" />
+            android:padding="10dp"
+            android:text="@string/finding_location"
+            android:inputType="none"
+            />
 
         <Button
             android:id="@+id/setLocation"

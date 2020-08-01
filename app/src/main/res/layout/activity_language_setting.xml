@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +23,7 @@
             android:text="@string/language_setting"
             android:textAlignment="center"
             android:textColor="@color/green"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -41,13 +40,14 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/language_option"
                 android:buttonTint="#000000"
-                android:checked="true"
                 android:paddingLeft="60dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="English"
                 android:textColor="#717171"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:checked="true"
+                />
 
             <RadioButton
                 android:id="@+id/bahasa_indonesia"
@@ -60,7 +60,9 @@
                 android:paddingBottom="15dp"
                 android:text="Indonesia"
                 android:textColor="#717171"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:checked="false"
+                />
 
             <RadioButton
                 android:id="@+id/javanese"
@@ -73,7 +75,9 @@
                 android:paddingBottom="15dp"
                 android:text="Javanese"
                 android:textColor="#717171"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:checked="false"
+                />
 
             <RadioButton
                 android:id="@+id/bahasa_sunda"
@@ -85,7 +89,9 @@
                 android:paddingBottom="15dp"
                 android:text="Sundanese"
                 android:textColor="#717171"
-                android:textSize="18dp" />
+                android:textSize="18sp"
+                android:checked="false"
+                />
 
         </RadioGroup>
 

@@ -27,78 +27,86 @@
         android:scaleY="1"
         android:src="@drawable/main_logo" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="57dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/complaintText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="sans-serif-black"
-            android:scaleType="fitCenter"
-            android:text="@string/complaint"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/yellow"
-            android:textSize="30dp" />
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:orientation="vertical"
+            android:paddingBottom="60dp">
 
-        <ImageView
-            android:id="@+id/complaint"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/home_complaint" />
+            <TextView
+                android:id="@+id/complaintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:scaleType="fitCenter"
+                android:text="@string/complaint"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="25sp" />
 
-        <ImageView
-            android:id="@+id/suggestion"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/home_suggestion" />
+            <ImageView
+                android:id="@+id/complaint"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/home_complaint" />
 
-        <TextView
-            android:id="@+id/suggestionText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:scaleType="fitCenter"
-            android:text="@string/give"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/green"
-            android:textSize="30dp"
+            <ImageView
+                android:id="@+id/suggestion"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/home_suggestion" />
 
-            />
+            <TextView
+                android:id="@+id/suggestionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:scaleType="fitCenter"
+                android:text="@string/give"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="25sp"
 
-        <TextView
-            android:id="@+id/suggestionText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:paddingBottom="40dp"
-            android:scaleType="fitCenter"
-            android:text="@string/suggestion"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/green"
-            android:textSize="30dp"
+                />
 
-            />
+            <TextView
+                android:id="@+id/suggestionText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:scaleType="fitCenter"
+                android:text="@string/suggestion"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="25sp"
+
+                />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    </ScrollView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.NavigationActivity">
