@@ -69,7 +69,7 @@ public class MapActivity extends AppCompatActivity {
     private GpsMyLocationProvider provider;
     private Overlay touchOverlay;
     private Button set_location;
-    private EditText address;
+    private TextView address;
 
     @Override
     public void onBackPressed() {
