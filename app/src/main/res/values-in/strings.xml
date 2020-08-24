@@ -182,4 +182,17 @@
     <string name="firefighter">Pemadam kebakaran</string>
     <string name="image_too_large">Ukuran gambar terlalu besar. Silakan pilih gambar lain!</string>
 
+
+    <string name="faq_submit_complaint_1">1. Buka tab Keluhan.</string>
+    <string name="faq_submit_complaint_2">2. Isi formulir (kategori, deskripsi, gambar, dan lokasi).</string>
+    <string name="faq_submit_complaint_3">3. Klik tombol kirim.</string>
+    <string name="faq_submit_complaint_4">4. Harap catat nomor pengaduan. Nomor tersebut dapat digunakan untuk memperbarui status pengaduan.</string>
+    <string name="faq_retrieve_complaint_1">1. Buka tab Laporan.</string>
+    <string name="faq_retrieve_complaint_2">2. Masukkan nomor pengaduan.</string>
+    <string name="faq_retrieve_complaint_3">"3. Klik tombol temukan untuk mendapatkan kembali keluhan tersebut."</string>
+    <string name="faq_change_language_1">1. Buka tab ekstra.</string>
+    <string name="faq_change_language_2">2. Buka pengaturan bahasa.</string>
+    <string name="faq_change_language_3">3. Pilih salah satu bahasa yang disukai.</string>
+    <string name="faq_change_language_4">"4. Klik tombol terapkan."</string>
+
 </resources>

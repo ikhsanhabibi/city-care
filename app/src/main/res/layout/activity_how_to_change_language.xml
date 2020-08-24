@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    tools:context=".activity.FAQ.HowToChangeLanguageActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:scaleType="fitCenter" />
+
+
+    <ImageView
+        android:id="@+id/left_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_chevron_left_black_24dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/main_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="sans-serif-black"
+            android:scaleType="fitCenter"
+            android:text="@string/how_to_change_the_language"
+            android:textAlignment="center"
+            android:textColor="#515C6F"
+            android:textSize="25dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/form_round_btn"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:textColor="@color/grey">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/faq_change_language_1"
+                android:textColor="@color/grey"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/faq_change_language_2"
+                android:textColor="@color/grey"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/faq_change_language_3"
+                android:textColor="@color/grey"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/faq_change_language_4"
+                android:textColor="@color/grey"
+                android:textSize="15dp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

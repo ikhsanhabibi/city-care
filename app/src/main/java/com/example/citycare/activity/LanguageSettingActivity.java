@@ -12,11 +12,13 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.citycare.R;
+import com.example.citycare.activity.FAQ.HowToRetrieveComplaintActivity;
 
 import java.util.Locale;
 
@@ -25,6 +27,7 @@ public class LanguageSettingActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton, enRadioButton, inRadioButton, jvRadioButton, suRadioButton;
     Button button_apply;
+    private ImageView left_btn;
 
 
     @Override
@@ -32,6 +35,17 @@ public class LanguageSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         loadLocale();
         setContentView(R.layout.activity_language_setting);
+
+        left_btn = findViewById(R.id.left_btn);
+        left_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent s = new Intent(LanguageSettingActivity.this, MoreActivity.class);
+                startActivity(s);
+                finish();
+            }
+        });
+
 
         radioGroup = findViewById(R.id.radioGroup);
         button_apply = findViewById(R.id.apply);

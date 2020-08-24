@@ -28,7 +28,10 @@
         android:roundIcon="@mipmap/city_care"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.EmergencyNumberActivity"></activity>
+        <activity android:name=".activity.FAQ.HowToChangeLanguageActivity"></activity>
+        <activity android:name=".activity.FAQ.HowToRetrieveComplaintActivity" />
+        <activity android:name=".activity.FAQ.HowToSubmitComplaintActivity" />
+        <activity android:name=".activity.EmergencyNumberActivity" />
         <activity android:name=".activity.AboutAppActivity" />
         <activity android:name=".activity.AllNewComplaintsActivity" />
         <activity android:name=".activity.ReportDetailsActivity" />

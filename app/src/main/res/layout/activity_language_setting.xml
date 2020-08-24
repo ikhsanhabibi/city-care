@@ -7,6 +7,29 @@
     tools:context=".activity.LanguageSettingActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:scaleType="fitCenter" />
+
+
+    <ImageView
+        android:id="@+id/left_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_chevron_left_black_24dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/main_logo" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,14 +63,13 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/language_option"
                 android:buttonTint="#000000"
+                android:checked="true"
                 android:paddingLeft="60dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="English"
                 android:textColor="#717171"
-                android:textSize="18sp"
-                android:checked="true"
-                />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/bahasa_indonesia"
@@ -55,14 +77,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/language_option"
+                android:checked="false"
                 android:paddingLeft="60dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Indonesia"
                 android:textColor="#717171"
-                android:textSize="18sp"
-                android:checked="false"
-                />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/javanese"
@@ -70,28 +91,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/language_option"
+                android:checked="false"
                 android:paddingLeft="60dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Javanese"
                 android:textColor="#717171"
-                android:textSize="18sp"
-                android:checked="false"
-                />
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/bahasa_sunda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/language_option"
+                android:checked="false"
                 android:paddingLeft="60dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Sundanese"
                 android:textColor="#717171"
-                android:textSize="18sp"
-                android:checked="false"
-                />
+                android:textSize="18sp" />
 
         </RadioGroup>
 

@@ -123,5 +123,17 @@
     <string name="firefighter">Firefighter</string>
     <string name="image_too_large">Image size is too large. Please choose another image!</string>
 
+    <string name="faq_submit_complaint_1">1. Go to the Complaint tab.</string>
+    <string name="faq_submit_complaint_2">2. Fill in the form (category, description, picture, and location).</string>
+    <string name="faq_submit_complaint_3">3. Click the send button.</string>
+    <string name="faq_submit_complaint_4">4. Please, take note of the complaint number. The number can be used to update the status of complaint.</string>
+    <string name="faq_retrieve_complaint_1">1. Go to Reports tab.</string>
+    <string name="faq_retrieve_complaint_2">2. Enter the complaint’s number.</string>
+    <string name="faq_retrieve_complaint_3">"3. Click the find button to retrieve the complaint. "</string>
+    <string name="faq_change_language_1">1. Go to more tab.</string>
+    <string name="faq_change_language_2">2. Go to language setting.</string>
+    <string name="faq_change_language_3">3. Choose one of a preferred language.</string>
+    <string name="faq_change_language_4">"4. Click the apply button. "</string>
+
 
 </resources>

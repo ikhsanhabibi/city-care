@@ -112,7 +112,7 @@
     <string name="suggestion_nr">Nomer Saran:</string>
     <string name="suggestion_number">Nomer saran</string>
     <string name="city_care">City Care</string>
-    <string name="how_to_submit_complaint">" 24/5000 Kumaha ngalebetkeun keluhan?"</string>
+    <string name="how_to_submit_complaint">Kumaha ngalebetkeun keluhan?</string>
     <string name="how_to_retrieve_complaint">Kumaha ningali keluhan kuring?</string>
     <string name="how_to_change_the_language">Kumaha cara ngarobah basa?</string>
     <string name="version">City Care Android v1.0.0</string>
@@ -124,6 +124,18 @@
     <string name="pln">Jurusan Listrik Nagara</string>
     <string name="firefighter">Petugas pemadam kebakaran</string>
     <string name="image_too_large">Ukuran gambarna ageung teuing. Mangga pilih gambar anu sanés!</string>
+
+    <string name="faq_submit_complaint_1">1. Pindah ka tab Keluhan.</string>
+    <string name="faq_submit_complaint_2">2. Eusian wujud (katégori, panjelasan, gambar, sareng lokasi).</string>
+    <string name="faq_submit_complaint_3">3. Pencét tombol kirim.</string>
+    <string name="faq_submit_complaint_4">4. Punten, perhatikeun nomer nomer keluhan. Nomer ieu tiasa dianggo pikeun ngapdet status keluhan.</string>
+    <string name="faq_retrieve_complaint_1">1. Pindah ka tab Laporan.</string>
+    <string name="faq_retrieve_complaint_2">2. Lebetkeun nomer keluhan</string>
+    <string name="faq_retrieve_complaint_3">"3. Klik tombol anu néang pikeun nyandak keluhanna."</string>
+    <string name="faq_change_language_1">1. Pindah ka tab anu langkung.</string>
+    <string name="faq_change_language_2">2. Pindah ka setting basa.</string>
+    <string name="faq_change_language_3">3. Pilih salah sahiji basa anu dipikaresep.</string>
+    <string name="faq_change_language_4">"4. Klik tombol panawaran."</string>
 
 
 </resources>

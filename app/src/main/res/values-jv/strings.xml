@@ -124,5 +124,17 @@
     <string name="firefighter">Petugas pemadam kebakaran</string>
     <string name="image_too_large">Ukuran gambar amba banget. Mangga pilih gambar liyane!</string>
 
+    <string name="faq_submit_complaint_1">1. Pindhah menyang tab Keluhan.</string>
+    <string name="faq_submit_complaint_2">2. Isine wujud (kategori, deskripsi, gambar, lan lokasi).</string>
+    <string name="faq_submit_complaint_3">3. Klik tombol kirim.</string>
+    <string name="faq_submit_complaint_4">4. Mangga, elinga nomer keluhan kasebut. Nomer kasebut bisa digunakake kanggo nganyari status keluhan.</string>
+    <string name="faq_retrieve_complaint_1">1. Pindhah menyang tab Lapuran.</string>
+    <string name="faq_retrieve_complaint_2">2. Ketik nomer keluhan</string>
+    <string name="faq_retrieve_complaint_3">"3. Klik tombol nemokake kanggo njaluk keluhan mau."</string>
+    <string name="faq_change_language_1">1. Menyang tab liyane.</string>
+    <string name="faq_change_language_2">2. Menyang setelan basa.</string>
+    <string name="faq_change_language_3">3. Pilih salah sawijining basa sing disenengi.</string>
+    <string name="faq_change_language_4">"4. Klik tombol aplikasi."</string>
+
 
 </resources>
