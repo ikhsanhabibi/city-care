@@ -13,6 +13,6 @@ infrastructure aided by immediate digital complaints submitted by citizens. The
 more convenient process of reporting infrastructure damage or destruction in the
 city will encourage wider public reporting.
 
-![android](https://user-images.githubusercontent.com/33756873/101171915-bc4e7f80-3640-11eb-90c1-362e599ea533.gif)
+![try](https://user-images.githubusercontent.com/33756873/101173516-eef97780-3642-11eb-9901-d3ee9db968bd.gif)
 
 by Ikhsan Habibi
